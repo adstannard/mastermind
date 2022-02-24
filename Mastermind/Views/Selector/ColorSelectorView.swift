@@ -21,7 +21,7 @@ struct ColorSelectorView: View {
                 
                 VStack {
                     ForEach(0..<numColors) {
-                        ColorSelectorItemView(color: colors[$0],
+                        ColorSelectorItem(color: colors[$0],
                                               content: Binding.constant(String($0+1)),
                                               attempt:$attempt,
                                               attemptColors:$attemptColors,

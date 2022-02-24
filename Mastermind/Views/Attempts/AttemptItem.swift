@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AttemptItemView: View {
+struct AttemptItem: View {
     
     @Binding var selected: Int
     @Binding var attempt: Int
@@ -15,7 +15,7 @@ struct AttemptItemView: View {
         Button(action: {
             selected = position
         }){
-            ColorButtonView(fill: $color,
+            ColorButton(fill: $color,
                             stroke: (currentAttempt == attempt  && selected == position) ?
                             Binding.constant(Color.white) : color == Color.clear ?
                             Binding.constant(Color.gray): Binding.constant(Color.clear),
@@ -28,9 +28,9 @@ struct AttemptItemView: View {
 }
 
 
-struct AttemptItemView_Previews: PreviewProvider {
+struct AttemptItem_Previews: PreviewProvider {
     static var previews: some View {
-        AttemptItemView(
+        AttemptItem(
             selected: Binding.constant(3),
             attempt: Binding.constant(3),
             position: Binding.constant(3),

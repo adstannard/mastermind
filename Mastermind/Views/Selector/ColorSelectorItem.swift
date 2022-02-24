@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ColorSelectorItemView: View {
+struct ColorSelectorItem: View {
     
     @State var color:Color
     @State var canSubmit:Bool = false
@@ -16,7 +16,7 @@ struct ColorSelectorItemView: View {
     
     var body: some View {
         Button(action: assignColor){
-            ColorButtonView(fill: $color,
+            ColorButton(fill: $color,
                             stroke: Binding.constant(.clear),
                             content: showNumbers ? $content : Binding.constant(""),
                             selected: Binding.constant(false))
@@ -61,9 +61,9 @@ struct ColorSelectorItemView: View {
 }
 
 
-struct ColorSelectorItemView_Previews: PreviewProvider {
+struct ColorSelectorItem_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSelectorItemView(color: Color.green,
+        ColorSelectorItem(color: Color.green,
                               content: Binding.constant("A"),
                               attempt: Binding.constant(0),
                               attemptColors: Binding.constant([[Color.green, Color.blue, Color.blue, Color.blue, Color.blue, Color.blue]]),
