@@ -54,10 +54,10 @@ struct InstructionsView: View {
                         VStack{
                             HStack{
                                 ForEach(0..<5)  {
-                                    ColorButtonView(fill: Binding.constant(code[$0]),
-                                                    stroke: Binding.constant(code[$0]),
-                                                    content: Binding.constant(showNumbers ? String(numbers[$0]+1) : ""),
-                                                    selected: Binding.constant(false))
+                                    ColorButton(fill: Binding.constant(code[$0]),
+                                                stroke: Binding.constant(code[$0]),
+                                                content: Binding.constant(showNumbers ? String(numbers[$0]+1) : ""),
+                                                selected: Binding.constant(false))
                                         .padding(.horizontal, 3).font(.system(size: 17))
                                     
                                 }}
@@ -77,32 +77,21 @@ struct InstructionsView: View {
                     }
                     Spacer()
                 }
-            }.foregroundColor(.accentColor)
-                .padding()
-                .font(.title3)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        VStack {
-                            Text("How to Play").font(.system(size: 30)).foregroundColor(.accentColor)
-                        }
+            }
+            .foregroundColor(.accentColor)
+            .padding()
+            .font(.title3)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack {
+                        Text("How to Play").font(.system(size: 30)).foregroundColor(.accentColor)
                     }
                 }
+            }
         }
     }
 }
-
-struct ColorView: View {
-    
-    var fill:Color
-    
-    var body: some View {
-        Circle()
-            .fill(fill)
-            .frame(width: 28, height: 28)
-    }
-}
-
 
 struct InstructionsView_Previews: PreviewProvider {
     static var previews: some View {

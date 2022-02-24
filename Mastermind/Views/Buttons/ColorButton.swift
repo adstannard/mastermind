@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ColorButtonView: View {
+struct ColorButton: View {
     
     @Binding var fill: Color
     @Binding var stroke: Color
@@ -42,9 +42,9 @@ struct ColorButtonView: View {
     }
 }
 
-struct ColorButtonView_Previews: PreviewProvider {
+struct ColorButton_Previews: PreviewProvider {
     static var previews: some View {
-        ColorButtonView(fill: Binding.constant(.purple),
+        ColorButton(fill: Binding.constant(.purple),
                         stroke: Binding.constant(.blue),
                         content: Binding.constant("Hi"),
                         selected: Binding.constant(true))
