@@ -23,7 +23,7 @@ struct AttemptItem: View {
                             selected: Binding.constant(currentAttempt == attempt  && selected == position))
         }
         .disabled(currentAttempt != attempt)
-        .foregroundColor(Color(red: 0.0, green: 0.2, blue: 0.2))
+        
     }
 }
 

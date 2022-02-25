@@ -25,6 +25,7 @@
 		D3CF235527C6FC37000540AC /* GameModeLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CF235427C6FC37000540AC /* GameModeLink.swift */; };
 		D3D022A727C6E97F00A1ADDD /* DifficultiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D022A627C6E97F00A1ADDD /* DifficultiesView.swift */; };
 		D3D022AA27C6EBD500A1ADDD /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D022A927C6EBD500A1ADDD /* Difficulty.swift */; };
+		D3DF7E1927C85C2E002BAB72 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DF7E1827C85C2E002BAB72 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -61,6 +62,7 @@
 		D3CF235427C6FC37000540AC /* GameModeLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeLink.swift; sourceTree = "<group>"; };
 		D3D022A627C6E97F00A1ADDD /* DifficultiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultiesView.swift; sourceTree = "<group>"; };
 		D3D022A927C6EBD500A1ADDD /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		D3DF7E1827C85C2E002BAB72 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		D3D0229D27C6E26600A1ADDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3DF7E1727C85C1C002BAB72 /* Timer */,
 				D37FFD9527C84812000C79FC /* Game */,
 				D37FFD9427C84701000C79FC /* Instructions */,
 				D3D022A527C6E95400A1ADDD /* Modes */,
@@ -193,6 +196,14 @@
 				D3D022A927C6EBD500A1ADDD /* Difficulty.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D3DF7E1727C85C1C002BAB72 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				D3DF7E1827C85C2E002BAB72 /* TimerView.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +293,7 @@
 				D32FD50927B330DC00CC43AC /* ColorSelectorView.swift in Sources */,
 				D3D022AA27C6EBD500A1ADDD /* Difficulty.swift in Sources */,
 				D3D022A727C6E97F00A1ADDD /* DifficultiesView.swift in Sources */,
+				D3DF7E1927C85C2E002BAB72 /* TimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@ struct GameModeLink: View {
     @Binding var selectedRight: Bool
     @Binding var difficulty: Difficulty
     
+    @State var lost: Bool = false
     
     func generateRandom(size: Int, max: Int) -> [Int] {
         (0..<size).map( {_ in Int.random(in: 0..<max)} )
@@ -39,10 +40,24 @@ struct GameModeLink: View {
     
     
     var body: some View {
-        NavigationLink(destination: GameView(difficulty: $difficulty,
+        NavigationLink(destination: GameView(lost:$lost, difficulty: $difficulty,
                                              ran: Binding.constant(duplicateColors ? generateRandom(size: difficulty.codeSize, max: difficulty.numColors) : generateUniqueRandom(size: difficulty.codeSize, max: difficulty.numColors)),
                                              selectedRight: $selectedRight,
-                                             showNumbers: $showNumbers)) {
+                                             showNumbers: $showNumbers
+                                            ).foregroundColor(.accentColor)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("")
+                        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    VStack{
+                        Text("time").font(.system(size: 13)).foregroundColor(.accentColor)
+                        TimerView(lost: $lost, i: (difficulty.difficulty == "Easy") ? Binding.constant(0) : Binding.constant(1))
+                    }
+                }.fixedSize(horizontal: true, vertical: true)
+            }
+            
+        }) {
             ModeButton(difficulty: $difficulty.difficulty,
                        color: $difficulty.color)
         }
