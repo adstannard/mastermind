@@ -12,7 +12,7 @@ struct GameView: View {
     @State var selected: Int = 0
     @State var hidden: Bool = true
     @State var won: Bool = false
-    @State var lost: Bool = false
+    @Binding var lost: Bool
     
     @Binding var difficulty: Difficulty
     @Binding var ran: [Int]
@@ -21,6 +21,7 @@ struct GameView: View {
     
     var body: some View {
         
+       
         let code = ran.map {(index) -> Color in colors[index]}
         
         ZStack {
@@ -31,14 +32,13 @@ struct GameView: View {
                     HStack(alignment: .center){
                         ForEach(0..<difficulty.codeSize)  {
                             
-                            
-                            if (hidden){
+                            if (hidden && !lost && !won){
                                 ColorButton(fill: Binding.constant(Color.clear),
                                             stroke: Binding.constant(Color.gray),
                                             content: Binding.constant("?"),
                                             selected: Binding.constant(false))
                             }
-                            else if (!hidden){
+                            else {
                                 ColorButton(fill: Binding.constant(code[$0]),
                                             stroke: Binding.constant(code[$0]),
                                             content: Binding.constant(showNumbers ? String(ran[$0]+1) : ""),
@@ -199,7 +199,8 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8,difficulty:"hard", color:.blue)),
+        GameView(lost: Binding.constant(false),
+                 difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8,difficulty:"Easy", color:.blue)),
                  ran: Binding.constant([1,0,2,2,3,6]),
                  selectedRight: Binding.constant(true),
                  showNumbers: Binding.constant(false))

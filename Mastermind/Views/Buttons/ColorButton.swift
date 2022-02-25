@@ -24,10 +24,10 @@ struct ColorButton: View {
                         self.wave.toggle()
                         withAnimation(
                             .easeInOut(duration: 1)
-                                        .repeatForever(autoreverses: true)
-                                        .speed(1.5)) {
-                            self.wave.toggle()
-                        }
+                                .repeatForever(autoreverses: true)
+                                .speed(1.5)) {
+                                    self.wave.toggle()
+                                }
                     }
             }
             else {
@@ -36,6 +36,7 @@ struct ColorButton: View {
                     .padding(.all, 0.0)
             }
             Text(content)
+            
         }
         .frame(width: 28, height: 28)
         .foregroundColor(Color(red: 0.0, green: 0.2, blue: 0.2))
@@ -45,8 +46,8 @@ struct ColorButton: View {
 struct ColorButton_Previews: PreviewProvider {
     static var previews: some View {
         ColorButton(fill: Binding.constant(.purple),
-                        stroke: Binding.constant(.blue),
-                        content: Binding.constant("Hi"),
-                        selected: Binding.constant(true))
+                    stroke: Binding.constant(.blue),
+                    content: Binding.constant("Hi"),
+                    selected: Binding.constant(true))
     }
 }

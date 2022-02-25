@@ -8,6 +8,7 @@ struct DifficultiesView: View {
     @State var timed: Bool = false
     @State var selectedRight: Bool = true
     
+
     
     private let difficulties = [
         Difficulty(maxAttempts: 8, codeSize: 4, numColors: 6, difficulty: "Easy", color: .green),
