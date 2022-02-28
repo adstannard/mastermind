@@ -14,13 +14,13 @@ struct ColorButton: View {
         ZStack {
             Circle()
                 .fill(fill)
-            if (selected){
+            if (selected) {
                 Circle()
                     .strokeBorder(stroke, lineWidth: 2)
                     .padding(.all, 0.0)
                     .scaleEffect(wave && (fill != Color.clear) ? 1.25 : 1)
                     .opacity(wave ? 1 : 0.3)
-                    .onAppear(){
+                    .onAppear() {
                         self.wave.toggle()
                         withAnimation(
                             .easeInOut(duration: 1)
@@ -36,18 +36,18 @@ struct ColorButton: View {
                     .padding(.all, 0.0)
             }
             Text(content)
-            
         }
         .frame(width: 28, height: 28)
-        .foregroundColor(Color(red: 0.0, green: 0.2, blue: 0.2))
+        .foregroundColor(content == "?" ? Color.gray : Color(red: 0.0, green: 0.2, blue: 0.2))
     }
 }
+
 
 struct ColorButton_Previews: PreviewProvider {
     static var previews: some View {
         ColorButton(fill: Binding.constant(.purple),
                     stroke: Binding.constant(.blue),
-                    content: Binding.constant("Hi"),
+                    content: Binding.constant("X"),
                     selected: Binding.constant(true))
     }
 }

@@ -4,24 +4,28 @@ struct GameView: View {
     private let colors: [Color] = [Color.red, Color.orange, Color.blue, Color.green, Color.yellow, Color.purple, Color.mint, Color.white]
     private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
     
-    @State var isReadyToSubmit = false
-    @State var attemptColors: [[Color]] = Array(repeating: Array(repeating: Color.clear, count: 6), count: 12)
-    @State var attemptNumbers: [[String]] = Array(repeating: Array(repeating: "", count: 6), count: 12)
-    @State var feedback: [[Color]] = Array(repeating: Array(repeating: Color.gray, count: 6), count: 12)
-    @State var currAttempt: Int = 0
-    @State var selected: Int = 0
-    @State var hidden: Bool = true
-    @State var won: Bool = false
-    @Binding var lost: Bool
+    @State private var isReadyToSubmit = false
+    @State private var attemptColors: [[Color]] = Array(repeating: Array(repeating: Color.clear, count: 6), count: 12)
+    @State private var attemptNumbers: [[String]] = Array(repeating: Array(repeating: "", count: 6), count: 12)
+    @State private var feedback: [[Color]] = Array(repeating: Array(repeating: Color.gray, count: 6), count: 12)
+    @State private var currAttempt: Int = 0
+    @State private var selected: Int = 0
+    @State private var hidden: Bool = true
     
+    @Binding var timed: Bool
+    @Binding var minutes: Int
+    @Binding var seconds: Int
+    @Binding var showPopUp: Bool
+    @Binding var won: Bool
+    @Binding var lost: Bool
     @Binding var difficulty: Difficulty
     @Binding var ran: [Int]
     @Binding var selectedRight: Bool
     @Binding var showNumbers: Bool
+    @Binding var selectedEnglish: Bool
+    
     
     var body: some View {
-        
-       
         let code = ran.map {(index) -> Color in colors[index]}
         
         ZStack {
@@ -119,8 +123,14 @@ struct GameView: View {
                 }
                 Spacer()
             }
+            
+            won ?
+            PopUpWindow(show: $showPopUp, title: "You Win!", message: timed ? String(format: "Time left\n %d:%02d", minutes, seconds) : "Well done!")
+            :
+            PopUpWindow(show: $showPopUp, title: "You Lost!", message: timed ? String(format: "Time left\n %d:%02d", minutes, seconds) : "Better luck next time!")
         }
     }
+    
     
     func checkCode(code: [Color], attempt: Int, attemptColors: [[Color]]) {
         
@@ -179,15 +189,17 @@ struct GameView: View {
         // won game
         if (right == difficulty.codeSize){
             won = true
+            showPopUp = true
             hidden = false
+            
         }
         
         // lost game
-        if (currAttempt >= difficulty.maxAttempts-1 && right != difficulty.codeSize){
+        if ((currAttempt >= difficulty.maxAttempts-1 && right != difficulty.codeSize) || (
+            minutes==0 && seconds==0)){
             lost = true
             hidden = false
         }
-        
         
         // advance to next attempt and reset values accordingly
         currAttempt += 1
@@ -199,10 +211,16 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(lost: Binding.constant(false),
-                 difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8,difficulty:"Easy", color:.blue)),
+        GameView(timed: Binding.constant(false),
+                 minutes:Binding.constant(2),
+                 seconds: Binding.constant(0),
+                 showPopUp: Binding.constant(false),
+                 won: Binding.constant(false),
+                 lost: Binding.constant(false),
+                 difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Easy", color: .blue)),
                  ran: Binding.constant([1,0,2,2,3,6]),
                  selectedRight: Binding.constant(true),
-                 showNumbers: Binding.constant(false))
+                 showNumbers: Binding.constant(false),
+                 selectedEnglish: Binding.constant(true))
     }
 }

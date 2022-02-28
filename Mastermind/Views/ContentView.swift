@@ -9,7 +9,7 @@ struct ContentView: View {
     @State var duplicateColors: Bool = true
     @State var timed: Bool = false
     @State var selectedRight: Bool = true
-    
+    @State var selectedEnglish: Bool = true
     @State private var wave = true
     
     
@@ -17,9 +17,9 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 Rectangle().foregroundColor(background).ignoresSafeArea()
-                VStack{
+                VStack {
                     Spacer()
-                    NavigationLink(destination:  DifficultiesView()) {
+                    NavigationLink(destination:  DifficultiesView(sound: $sound, showNumbers: $showNumbers, duplicateColors: $duplicateColors, timed: $timed, selectedRight: $selectedRight, selectedEnglish: $selectedEnglish)) {
                         Image(systemName: "play")
                             .resizable()
                             .frame(width: 40, height: 40)
@@ -28,7 +28,7 @@ struct ContentView: View {
                                             .frame(width: 100, height: 100))
                             .padding()
                             .opacity(wave ? 1 : 0.3)
-                            .onAppear(){
+                            .onAppear() {
                                 self.wave.toggle()
                                 withAnimation(
                                     .easeInOut(duration: 1)
@@ -43,10 +43,10 @@ struct ContentView: View {
                                                              showNumbers: $showNumbers,
                                                              duplicateColors: $duplicateColors,
                                                              timed: $timed,
-                                                             selectedRight: $selectedRight)) {
-                        Image(systemName: "gearshape.2.fill")
+                                                             selectedRight: $selectedRight, selectedEnglish: $selectedEnglish)) {
+                        Image(systemName: "gearshape.2")
                             .resizable()
-                            .frame(width: 32, height: 28)
+                            .frame(width: 32, height: 25)
                             .background(RoundedRectangle(cornerRadius: 4)
                                             .stroke(Color.accentColor, lineWidth: 2)
                                             .frame(width: 60, height: 50))

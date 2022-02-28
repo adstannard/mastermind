@@ -8,63 +8,74 @@ struct SettingsView: View {
     @Binding var duplicateColors: Bool
     @Binding var timed: Bool
     @Binding var selectedRight: Bool
+    @Binding var selectedEnglish: Bool
     
     
     var body: some View {
         ZStack {
             Rectangle().foregroundColor(background).ignoresSafeArea()
-            VStack(alignment: .leading){
+            VStack(alignment: .leading) {
                 Group {
                     NavigationLink(destination: InstructionsView(showNumbers: $showNumbers)) {
-                        HStack{
+                        HStack {
                             Text("How to play")
                         }
                     }
                     Divider().background(Color.accentColor).padding(.vertical,10)
-                    Toggle(isOn: $sound, label: {Text("Sound:")}).tint(.accentColor)
+                    Toggle(isOn: $sound, label: { Text("Sound:") }).tint(.accentColor)
                     Divider().background(Color.accentColor).padding(.vertical,10)
-                    Toggle(isOn: $showNumbers, label: {Text("Show Numbers:")}).tint(.accentColor)
+                    Toggle(isOn: $showNumbers, label: { Text("Show Numbers:") }).tint(.accentColor)
                     Divider().background(Color.accentColor).padding(.vertical,10)
-                    Toggle(isOn: $duplicateColors, label: {Text("Allow Repeats:")}).tint(.accentColor)
+                    Toggle(isOn: $duplicateColors, label: { Text("Allow Repeats:") }).tint(.accentColor)
                     Divider().background(Color.accentColor).padding(.vertical,10)
                     Group {
-                        Toggle(isOn: $timed, label: {Text("Use Timer:")}).tint(.accentColor)
+                        Toggle(isOn: $timed, label: { Text("Use Timer:") }).tint(.accentColor)
                         
                         Divider().background(Color.accentColor).padding(.vertical,10)
                         
-                        HStack{
+                        HStack {
                             Text("Color Selector:")
                             Spacer()
-                            Button(action:{ selectedRight.toggle()}){
+                            Button(action:{ selectedRight.toggle() }) {
                                 Text(selectedRight ? "Right" : "Left")
+                            }
+                        }
+                        Divider().background(Color.accentColor).padding(.vertical,10)
+                        
+                        HStack {
+                            Text("Language:")
+                            Spacer()
+                            Button(action:{ selectedEnglish.toggle() }) {
+                                Text(selectedEnglish ? "English" : "Spanish")
                             }
                         }
                     }
                 }
                 Spacer()
-                
-            }.foregroundColor(.accentColor)
-                .padding()
-                .font(.title2)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("")
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        VStack {
-                            Text("Settings").font(.system(size: 30)).foregroundColor(.accentColor)
-                        }
+            }
+            .foregroundColor(.accentColor)
+            .padding()
+            .font(.title2)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack {
+                        Text("Settings").font(.system(size: 30)).foregroundColor(.accentColor)
                     }
                 }
+            }
         }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(sound: Binding.constant(true),
+        SettingsView(sound: Binding.constant(false),
                      showNumbers: Binding.constant(false),
                      duplicateColors: Binding.constant(true),
                      timed: Binding.constant(false),
-                     selectedRight: Binding.constant(true))
+                     selectedRight: Binding.constant(true),
+                     selectedEnglish: Binding.constant(true))
     }
 }
