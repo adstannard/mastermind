@@ -21,7 +21,7 @@ struct PopUpWindow: View {
                     Text(title)
                         .frame(maxWidth: .infinity)
                         .frame(height: 45, alignment: .center)
-                        .  font(Font.system(size: 19, weight: .semibold))
+                        .  font(Font.system(size: 23, weight: .semibold))
                         .padding(EdgeInsets(top: 0, leading: 25, bottom: 20, trailing: 25))
                         .foregroundColor(.accentColor)
                     
@@ -92,8 +92,7 @@ struct PopUpWindow_Previews: PreviewProvider {
     static var previews: some View {
         PopUpWindow(show: Binding.constant(true),
                     shouldPopToRootView: Binding.constant(true),
-                    title:"CONGRATULATIONS!",
-                    // title:"Congratulations!",
+                    title:"Congratulations!",
                     subTitle: "YOU WIN",
                     time:"time left\n0:30",
                     attempt:"attempts\n2")

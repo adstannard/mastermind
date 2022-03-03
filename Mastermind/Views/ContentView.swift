@@ -7,7 +7,7 @@ struct ContentView: View {
     @State var sound: Bool = true
     @State var showNumbers: Bool = false
     @State var duplicateColors: Bool = true
-    @State var timed: Bool = false
+    @State var timed: Bool = true
     @State var selectedRight: Bool = true
     @State var selectedEnglish: Bool = true
     @State private var wave = true

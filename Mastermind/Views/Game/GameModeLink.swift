@@ -11,7 +11,7 @@ struct GameModeLink: View {
     @Binding var difficulty: Difficulty
     @Binding var ran: [Int]
     
-    @State var minutes: [Int] = [1, 4]
+    @State var minutes: [Int] = [3, 4]
     @State var seconds: Int = 0
     @State var showPopUp: Bool = false
     @State var lost: Bool = false
