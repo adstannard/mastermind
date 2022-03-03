@@ -125,6 +125,8 @@
 		D37FFD9527C84812000C79FC /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				D3D022A627C6E97F00A1ADDD /* DifficultiesView.swift */,
+				D3CF235427C6FC37000540AC /* GameModeLink.swift */,
 				D32FD50E27B3312900CC43AC /* GameView.swift */,
 			);
 			path = Game;
@@ -145,7 +147,6 @@
 				D3DF7E1727C85C1C002BAB72 /* Timer */,
 				D37FFD9527C84812000C79FC /* Game */,
 				D37FFD9427C84701000C79FC /* Instructions */,
-				D3D022A527C6E95400A1ADDD /* Modes */,
 				D3D022A327C6E6F200A1ADDD /* Selector */,
 				D3D022A227C6E69500A1ADDD /* Buttons */,
 				D3D022A027C6E5F300A1ADDD /* Attempts */,
@@ -190,15 +191,6 @@
 				D32FD50A27B330F100CC43AC /* ColorSelectorItem.swift */,
 			);
 			path = Selector;
-			sourceTree = "<group>";
-		};
-		D3D022A527C6E95400A1ADDD /* Modes */ = {
-			isa = PBXGroup;
-			children = (
-				D3D022A627C6E97F00A1ADDD /* DifficultiesView.swift */,
-				D3CF235427C6FC37000540AC /* GameModeLink.swift */,
-			);
-			path = Modes;
 			sourceTree = "<group>";
 		};
 		D3D022A827C6EB7B00A1ADDD /* Model */ = {
