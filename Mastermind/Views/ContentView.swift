@@ -3,15 +3,14 @@ import SwiftUI
 struct ContentView: View {
     
     private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
-    
+    @State var isActive : Bool = false
     @State var sound: Bool = true
     @State var showNumbers: Bool = false
     @State var duplicateColors: Bool = true
-    @State var timed: Bool = false
+    @State var timed: Bool = true
     @State var selectedRight: Bool = true
     @State var selectedEnglish: Bool = true
     @State private var wave = true
-    
     
     var body: some View {
         NavigationView {
@@ -19,7 +18,14 @@ struct ContentView: View {
                 Rectangle().foregroundColor(background).ignoresSafeArea()
                 VStack {
                     Spacer()
-                    NavigationLink(destination:  DifficultiesView(sound: $sound, showNumbers: $showNumbers, duplicateColors: $duplicateColors, timed: $timed, selectedRight: $selectedRight, selectedEnglish: $selectedEnglish)) {
+                    NavigationLink(destination:  DifficultiesView(rootIsActive: self.$isActive,
+                                                                  sound: $sound,
+                                                                  showNumbers: $showNumbers,
+                                                                  duplicateColors: $duplicateColors,
+                                                                  timed: $timed,
+                                                                  selectedRight: $selectedRight,
+                                                                  selectedEnglish: $selectedEnglish),
+                                   isActive: self.$isActive) {
                         Image(systemName: "play")
                             .resizable()
                             .frame(width: 40, height: 40)

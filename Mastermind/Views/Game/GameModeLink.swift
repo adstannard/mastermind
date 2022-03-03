@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GameModeLink: View {
-    
+    @Binding var shouldPopToRootView : Bool
     @Binding var sound: Bool
     @Binding var showNumbers: Bool
     @Binding var duplicateColors: Bool
@@ -11,17 +11,18 @@ struct GameModeLink: View {
     @Binding var difficulty: Difficulty
     @Binding var ran: [Int]
     
-    @State var minutes: [Int] = [2, 4]
+    @State var minutes: [Int] = [3, 4]
     @State var seconds: Int = 0
     @State var showPopUp: Bool = false
     @State var lost: Bool = false
     @State var won: Bool = false
     
     @State private var action: Int? = 0
-    
+    @Environment(\.presentationMode) var presentation
     
     var body: some View {
-        NavigationLink(destination: GameView(timed: $timed,
+        NavigationLink(destination: GameView(shouldPopToRootView: $shouldPopToRootView,
+                                             timed: $timed,
                                              minutes: $minutes[difficulty.difficulty == "Easy" ? 0 : 1],
                                              seconds: $seconds,
                                              showPopUp: $showPopUp,
@@ -55,11 +56,9 @@ struct GameModeLink: View {
             }
             
             ToolbarItem(placement: .automatic) {
-                HStack {
-                    NavigationLink(destination: DifficultiesView(sound: $sound, showNumbers: $showNumbers, duplicateColors: $duplicateColors, timed: $timed, selectedRight: $selectedRight, selectedEnglish: $selectedEnglish)) {
-                        Image(systemName: "plus.square")
-                    }
-                }.fixedSize(horizontal: true, vertical: true)
+                Button (action: { shouldPopToRootView = false } ){
+                    Image(systemName: "plus.square")
+                }
             }
         }){
             ModeButton(difficulty: $difficulty.difficulty,
@@ -71,7 +70,8 @@ struct GameModeLink: View {
 
 struct GameModeLink_Previews: PreviewProvider {
     static var previews: some View {
-        GameModeLink(sound: Binding.constant(false),
+        GameModeLink(shouldPopToRootView: Binding.constant(false),
+                     sound: Binding.constant(false),
                      showNumbers: Binding.constant(true),
                      duplicateColors: Binding.constant(false),
                      timed: Binding.constant(false),

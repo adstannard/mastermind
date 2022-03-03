@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DifficultiesView: View {
-    
+    @Binding var rootIsActive: Bool
     @Binding var sound: Bool
     @Binding var showNumbers: Bool
     @Binding var duplicateColors: Bool
@@ -9,12 +9,14 @@ struct DifficultiesView: View {
     @Binding var selectedRight: Bool
     @Binding var selectedEnglish: Bool
     
+    // difficulties array
     private let difficulties = [
         Difficulty(maxAttempts: 8, codeSize: 4, numColors: 6, difficulty: "Easy", color: .green),
         Difficulty(maxAttempts: 10, codeSize: 5, numColors: 7, difficulty: "Medium", color: .orange),
         Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Hard", color: .red)
     ]
     
+    // screen background
     private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
     
     // generate random code (repetition allowed)
@@ -44,7 +46,8 @@ struct DifficultiesView: View {
             VStack{
                 Spacer()
                 ForEach(difficulties, id: \.self) {
-                    GameModeLink(sound: $sound,
+                    GameModeLink(shouldPopToRootView: $rootIsActive,
+                                 sound: $sound,
                                  showNumbers: $showNumbers,
                                  duplicateColors: $duplicateColors,
                                  timed: $timed,
@@ -68,7 +71,12 @@ struct DifficultiesView: View {
                 }
                 ToolbarItem(placement: .automatic) {
                     VStack {
-                        NavigationLink(destination: SettingsView(sound: $sound, showNumbers: $showNumbers, duplicateColors: $duplicateColors, timed: $timed, selectedRight: $selectedRight, selectedEnglish: $selectedEnglish)) {
+                        NavigationLink(destination: SettingsView(sound: $sound,
+                                                                 showNumbers: $showNumbers,
+                                                                 duplicateColors: $duplicateColors,
+                                                                 timed: $timed,
+                                                                 selectedRight: $selectedRight,
+                                                                 selectedEnglish: $selectedEnglish)) {
                             Image(systemName: "gearshape")
                         }
                     }
@@ -81,6 +89,12 @@ struct DifficultiesView: View {
 
 struct DifficultiesView_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultiesView(sound: Binding.constant(true), showNumbers: Binding.constant(true), duplicateColors: Binding.constant(true), timed: Binding.constant(true), selectedRight: Binding.constant(true), selectedEnglish: Binding.constant(true))
+        DifficultiesView(rootIsActive: Binding.constant(false),
+                         sound: Binding.constant(true),
+                         showNumbers: Binding.constant(true),
+                         duplicateColors: Binding.constant(true),
+                         timed: Binding.constant(true),
+                         selectedRight: Binding.constant(true),
+                         selectedEnglish: Binding.constant(true))
     }
 }

@@ -12,6 +12,7 @@ struct GameView: View {
     @State private var selected: Int = 0
     @State private var hidden: Bool = true
     
+    @Binding var shouldPopToRootView : Bool
     @Binding var timed: Bool
     @Binding var minutes: Int
     @Binding var seconds: Int
@@ -26,6 +27,7 @@ struct GameView: View {
     
     
     var body: some View {
+        // initialize code with colors based on random color indexes
         let code = ran.map {(index) -> Color in colors[index]}
         
         ZStack {
@@ -34,14 +36,16 @@ struct GameView: View {
                 Spacer()
                 Group {
                     HStack(alignment: .center){
+                        // secret code
                         ForEach(0..<difficulty.codeSize)  {
-                            
+                            // hide code
                             if (hidden && !lost && !won){
                                 ColorButton(fill: Binding.constant(Color.clear),
                                             stroke: Binding.constant(Color.gray),
                                             content: Binding.constant("?"),
                                             selected: Binding.constant(false))
                             }
+                            // reveal code
                             else {
                                 ColorButton(fill: Binding.constant(code[$0]),
                                             stroke: Binding.constant(code[$0]),
@@ -50,6 +54,7 @@ struct GameView: View {
                             }
                         }
                         
+                        // temporary button to reveal secret code
                         Button(action: {
                             hidden.toggle()
                         }){
@@ -60,8 +65,8 @@ struct GameView: View {
                 Spacer()
                 HStack{
                     if (selectedRight){
+                        // place list of attempts to the left of color selector
                         Spacer()
-                        
                         VStack(alignment: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/){
                             ForEach(0..<difficulty.maxAttempts){
                                 AttemptView(selected: $selected,
@@ -78,6 +83,8 @@ struct GameView: View {
                         }
                     }
                     Spacer()
+                    
+                    // color selector and submit attempt button
                     VStack{
                         ColorSelectorView(numColors: $difficulty.numColors,
                                           attempt: $currAttempt,
@@ -87,7 +94,6 @@ struct GameView: View {
                                           isReadyToSubmit: $isReadyToSubmit,
                                           showNumbers: $showNumbers,
                                           attemptNumbers: $attemptNumbers)
-                        
                         Button(action:{ checkCode(code: code,
                                                   attempt: currAttempt,
                                                   attemptColors: attemptColors)}){
@@ -103,7 +109,9 @@ struct GameView: View {
                         }.disabled(!isReadyToSubmit)
                     }
                     Spacer()
+                    
                     if (!selectedRight){
+                        // place list of attempts to the right of color selector
                         VStack(alignment: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/){
                             ForEach(0..<difficulty.maxAttempts){
                                 AttemptView(selected: $selected,
@@ -124,14 +132,17 @@ struct GameView: View {
                 Spacer()
             }
             
-            won ?
-            PopUpWindow(show: $showPopUp, title: "You Win!", message: timed ? String(format: "Time left\n %d:%02d", minutes, seconds) : "Well done!")
-            :
-            PopUpWindow(show: $showPopUp, title: "You Lost!", message: timed ? String(format: "Time left\n %d:%02d", minutes, seconds) : "Better luck next time!")
+            // end game popup
+            PopUpWindow(show: $showPopUp,
+                        shouldPopToRootView: $shouldPopToRootView,
+                        title: won ? "Congratulations!" : "Game Over",
+                        subTitle: won ? "YOU WIN" : "YOU LOSE",
+                        time: timed ? String(format: "time left\n%d:%02d", minutes, seconds) : "",
+                        attempt: "attempt\(currAttempt <= 1 ? "" : "s")\n\(currAttempt)")
         }
     }
     
-    
+    // check attempt, check if game was won or lost, and advance to next attempt
     func checkCode(code: [Color], attempt: Int, attemptColors: [[Color]]) {
         
         // rightly positioned colors counter
@@ -189,9 +200,8 @@ struct GameView: View {
         // won game
         if (right == difficulty.codeSize){
             won = true
-            showPopUp = true
             hidden = false
-            
+            showPopUp = true
         }
         
         // lost game
@@ -199,6 +209,7 @@ struct GameView: View {
             minutes==0 && seconds==0)){
             lost = true
             hidden = false
+            showPopUp = true
         }
         
         // advance to next attempt and reset values accordingly
@@ -211,7 +222,8 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(timed: Binding.constant(false),
+        GameView(shouldPopToRootView:  Binding.constant(false),
+                 timed: Binding.constant(false),
                  minutes:Binding.constant(2),
                  seconds: Binding.constant(0),
                  showPopUp: Binding.constant(false),
