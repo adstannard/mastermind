@@ -7,7 +7,6 @@ struct GameModeLink: View {
     @Binding var duplicateColors: Bool
     @Binding var timed: Bool
     @Binding var selectedRight: Bool
-    @Binding var selectedEnglish: Bool
     @Binding var difficulty: Difficulty
     @Binding var ran: [Int]
     
@@ -31,8 +30,7 @@ struct GameModeLink: View {
                                              difficulty: $difficulty,
                                              ran: $ran,
                                              selectedRight: $selectedRight,
-                                             showNumbers: $showNumbers,
-                                             selectedEnglish: $selectedEnglish
+                                             showNumbers: $showNumbers
                                             )
                         .foregroundColor(.accentColor)
                         .navigationBarTitleDisplayMode(.inline)
@@ -76,7 +74,6 @@ struct GameModeLink_Previews: PreviewProvider {
                      duplicateColors: Binding.constant(false),
                      timed: Binding.constant(false),
                      selectedRight: Binding.constant(true),
-                     selectedEnglish: Binding.constant(true),
                      difficulty: Binding.constant(Difficulty(maxAttempts: 8, codeSize: 4, numColors: 6, difficulty: "Easy", color: Color.blue)),
                      ran: Binding.constant([2,1,1,1]))
     }

@@ -9,26 +9,26 @@ struct PopUpWindow: View {
     var title: String
     var subTitle: String
     var time: String
-    var attempt: String
+    var attempt: Int
     
     var body: some View {
         ZStack {
             if show {
-                Color.black.opacity(show ? 0.3 : 0).edgesIgnoringSafeArea(.all)
+                Color.black.opacity(show ? 0.4 : 0).edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .center, spacing: 0) {
                     
-                    Text(title)
+                    Text(LocalizedStringKey(title))
                         .frame(maxWidth: .infinity)
                         .frame(height: 45, alignment: .center)
-                        .  font(Font.system(size: 23, weight: .semibold))
-                        .padding(EdgeInsets(top: 0, leading: 25, bottom: 20, trailing: 25))
+                        .font(Font.system(size: 23, weight: .semibold))
+                        .padding(EdgeInsets(top: 0, leading: 25, bottom: 10, trailing: 25))
                         .foregroundColor(.accentColor)
                     
-                    Text(subTitle)
+                    Text(LocalizedStringKey(subTitle))
                         .multilineTextAlignment(.center)
                         .font(Font.system(size: 25, weight: .semibold))
-                        .padding(EdgeInsets(top: 0, leading: 25, bottom: 30, trailing: 25))
+                        .padding(EdgeInsets(top: 0, leading: 25, bottom: 20, trailing: 25))
                         .foregroundColor(.accentColor)
                         .opacity(wave ? 1 : 0.3)
                         .onAppear() {
@@ -44,18 +44,31 @@ struct PopUpWindow: View {
                     
                     HStack {
                         if (time != "") {
-                            Text(time)
+                            VStack{
+                                Text("time left")
+                                    .multilineTextAlignment(.center)
+                                    .font(Font.system(size: 16))
+                                    .padding(EdgeInsets(top: 0, leading: 25, bottom: 0, trailing: 25))
+                                    .foregroundColor(.accentColor)
+                                Text(time)
+                                    .multilineTextAlignment(.center)
+                                    .font(Font.system(size: 16))
+                                    .padding(EdgeInsets(top: 0, leading: 25, bottom: 10, trailing: 25))
+                                    .foregroundColor(.accentColor)
+                            }
+                        }
+                        VStack{
+                            Text("attempt\(attempt <= 1 ? "" : "s")")
+                                .multilineTextAlignment(.center)
+                                .font(Font.system(size: 16))
+                                .padding(EdgeInsets(top: 0, leading: 25, bottom: 0, trailing: 25))
+                                .foregroundColor(.accentColor)
+                            Text(String(attempt))
                                 .multilineTextAlignment(.center)
                                 .font(Font.system(size: 16))
                                 .padding(EdgeInsets(top: 0, leading: 25, bottom: 10, trailing: 25))
                                 .foregroundColor(.accentColor)
                         }
-                        
-                        Text(attempt)
-                            .multilineTextAlignment(.center)
-                            .font(Font.system(size: 16))
-                            .padding(EdgeInsets(top: 0, leading: 25, bottom: 10, trailing: 25))
-                            .foregroundColor(.accentColor)
                     }
                     
                     Button(action: {
@@ -73,11 +86,13 @@ struct PopUpWindow: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.accentColor, lineWidth: 2)
-                            ).background(RoundedRectangle(cornerRadius: 10).fill(Color(red: 0.0, green: 0.15, blue: 0.15))).padding(EdgeInsets(top: 30, leading: 25, bottom: 20, trailing: 25))
+                            ).background(RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color(red: 0.0, green: 0.15, blue: 0.15)))
+                            .padding(EdgeInsets(top: 10, leading: 25, bottom: 20, trailing: 25))
                         
                     }).buttonStyle(PlainButtonStyle())
                 }
-                .frame(maxWidth: 242)
+                .frame(maxWidth: 281)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.accentColor, lineWidth: 2)
@@ -92,9 +107,9 @@ struct PopUpWindow_Previews: PreviewProvider {
     static var previews: some View {
         PopUpWindow(show: Binding.constant(true),
                     shouldPopToRootView: Binding.constant(true),
-                    title:"Congratulations!",
-                    subTitle: "YOU WIN",
-                    time:"time left\n0:30",
-                    attempt:"attempts\n2")
+                    title:"TitleWon",
+                    subTitle: "SubTitleWon",
+                    time:  String(format: "%d:%02d", 3, 2),
+                    attempt:3).environment(\.locale, Locale(identifier: "es"))
     }
 }

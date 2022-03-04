@@ -1,0 +1,43 @@
+// Spanish
+
+
+// Toolbar Items
+"time" = "tiempo";
+
+// Modes
+"Game Modes" = "Modos de Juego";
+"Easy" = "Fácil";
+"Medium" = "Normal";
+"Hard" = "Difícil";
+
+// Settings
+"Settings" = "Ajustes";
+"Sound:" = "Sonido:";
+"Show Numbers:" = "Ver Números:";
+"Allow Repeats:" = "Colores Repetidos:";
+"Use Timer:" = "Jugar por Tiempo:";
+"Color Selector:" = "Selector de Colores:";
+"Right" = "Derecha";
+"Left" = "Izquierda";
+
+// Game Instructions
+"How to play" = "Cómo se juega";
+"Object" = "Objetivo";
+"Object_1" = "Adivina el código de colores en el menor número de intentos posible.";
+"Object_2" = "Al final de cada intento recibirá pistas que le ayudarán a resolver el código.";
+"Gameplay" = "Reglas";
+"Gameplay_1" = "Debe asignar colores a cada espacio vacío apretando los botones de colores. Confirme su código presionando el botón con la marca de verificación.";
+"Gameplay_2" = "Cada elemento del código es evaluado individualmente y las pistas son:";
+"Gameplay_3" = ": un color en la posición correcta";
+"Gameplay_4" = ": un color en la posición incorrecta";
+"Gameplay_5" = ": un color incorrecto";
+"Gameplay_6" = "Las pistas mencionadas anteriormente no están dadas en ningún orden en particular. Usted debe adivinar a cual elemento le coresponde cada pista.";
+"Example" = "Ejemplo";
+
+// Pop Up Window
+"TitleWon" = "Felicidades!";
+"TitleLost" = "Partido Terminado";
+"SubTitleWon" = "GANASTE";
+"SubTitleLost" = "PERDISTE";
+"attempt%@" = "intento%@";
+"time left" =  "tiempo restante";

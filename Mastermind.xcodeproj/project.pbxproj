@@ -19,6 +19,8 @@
 		D32FD50F27B3312900CC43AC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32FD50E27B3312900CC43AC /* GameView.swift */; };
 		D3563FD127B33C9200B7BF89 /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3563FD027B33C9200B7BF89 /* ColorButton.swift */; };
 		D38C397F27C99A9B004125AA /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C397E27C99A9B004125AA /* PopUpWindow.swift */; };
+		D3AC5F0327D17136000710A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3AC5F0527D17136000710A2 /* Localizable.strings */; };
+		D3AC5F0927D17806000710A2 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC5F0827D17806000710A2 /* PlayButton.swift */; };
 		D3B72CB627B5B38E003120D7 /* ModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B72CB527B5B38E003120D7 /* ModeButton.swift */; };
 		D3B72CBA27B5D781003120D7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B72CB927B5D781003120D7 /* SettingsView.swift */; };
 		D3B72CBC27B5F851003120D7 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B72CBB27B5F851003120D7 /* InstructionsView.swift */; };
@@ -57,6 +59,9 @@
 		D32FD50E27B3312900CC43AC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D3563FD027B33C9200B7BF89 /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		D38C397E27C99A9B004125AA /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
+		D3AC5F0427D17136000710A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D3AC5F0627D1713A000710A2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D3AC5F0827D17806000710A2 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		D3B72CB527B5B38E003120D7 /* ModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeButton.swift; sourceTree = "<group>"; };
 		D3B72CB927B5D781003120D7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D3B72CBB27B5F851003120D7 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		D3D0229D27C6E26600A1ADDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3AC5F0527D17136000710A2 /* Localizable.strings */,
 				D38C397D27C99A70004125AA /* Popups */,
 				D3DF7E1727C85C1C002BAB72 /* Timer */,
 				D37FFD9527C84812000C79FC /* Game */,
@@ -180,6 +186,7 @@
 			children = (
 				D3563FD027B33C9200B7BF89 /* ColorButton.swift */,
 				D3B72CB527B5B38E003120D7 /* ModeButton.swift */,
+				D3AC5F0827D17806000710A2 /* PlayButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -252,6 +259,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = D32FD4EA27B3304500CC43AC;
 			productRefGroup = D32FD4F427B3304500CC43AC /* Products */;
@@ -269,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D32FD4FE27B3304800CC43AC /* Preview Assets.xcassets in Resources */,
+				D3AC5F0327D17136000710A2 /* Localizable.strings in Resources */,
 				D32FD4FB27B3304800CC43AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +297,7 @@
 				D3563FD127B33C9200B7BF89 /* ColorButton.swift in Sources */,
 				D3B72CBA27B5D781003120D7 /* SettingsView.swift in Sources */,
 				D3B72CB627B5B38E003120D7 /* ModeButton.swift in Sources */,
+				D3AC5F0927D17806000710A2 /* PlayButton.swift in Sources */,
 				D32FD50727B330C100CC43AC /* AttemptItem.swift in Sources */,
 				D3B72CBE27B624CA003120D7 /* FeedbackItem.swift in Sources */,
 				D32FD4F727B3304500CC43AC /* MastermindApp.swift in Sources */,
@@ -302,6 +312,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D3AC5F0527D17136000710A2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3AC5F0427D17136000710A2 /* en */,
+				D3AC5F0627D1713A000710A2 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D32FD4FF27B3304800CC43AC /* Debug */ = {
