@@ -9,13 +9,12 @@ struct ContentView: View {
     @State var duplicateColors: Bool = true
     @State var timed: Bool = true
     @State var selectedRight: Bool = true
-    @State var selectedEnglish: Bool = true
-    @State private var wave = true
+   
     
     var body: some View {
         NavigationView {
             ZStack {
-                Rectangle().foregroundColor(background).ignoresSafeArea()
+                background.edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer()
                     NavigationLink(destination:  DifficultiesView(rootIsActive: self.$isActive,
@@ -23,33 +22,16 @@ struct ContentView: View {
                                                                   showNumbers: $showNumbers,
                                                                   duplicateColors: $duplicateColors,
                                                                   timed: $timed,
-                                                                  selectedRight: $selectedRight,
-                                                                  selectedEnglish: $selectedEnglish),
+                                                                  selectedRight: $selectedRight),
                                    isActive: self.$isActive) {
-                        Image(systemName: "play")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .background(RoundedRectangle(cornerRadius: 4)
-                                            .stroke(Color.accentColor, lineWidth: 2)
-                                            .frame(width: 100, height: 100))
-                            .padding()
-                            .opacity(wave ? 1 : 0.3)
-                            .onAppear() {
-                                self.wave.toggle()
-                                withAnimation(
-                                    .easeInOut(duration: 1)
-                                        .repeatForever(autoreverses: true)
-                                        .speed(1.5)) {
-                                            self.wave.toggle()
-                                        }
-                            }
+                       PlayButton()
                     }
                     Spacer()
                     NavigationLink(destination: SettingsView(sound: $sound,
                                                              showNumbers: $showNumbers,
                                                              duplicateColors: $duplicateColors,
                                                              timed: $timed,
-                                                             selectedRight: $selectedRight, selectedEnglish: $selectedEnglish)) {
+                                                             selectedRight: $selectedRight)) {
                         Image(systemName: "gearshape.2")
                             .resizable()
                             .frame(width: 32, height: 25)
@@ -59,6 +41,7 @@ struct ContentView: View {
                             .padding()
                     }
                 }
+                .zIndex(2)
                 .foregroundColor(.accentColor)
                 .padding()
                 .font(.title2)
@@ -79,6 +62,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environment(\.locale, Locale(identifier: "es"))
     }
 }

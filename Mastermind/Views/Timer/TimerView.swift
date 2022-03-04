@@ -39,6 +39,9 @@ struct TimerView: View {
                     }
                 }
             }
+            else {
+                return
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ struct SettingsView: View {
     @Binding var duplicateColors: Bool
     @Binding var timed: Bool
     @Binding var selectedRight: Bool
-    @Binding var selectedEnglish: Bool
     
     
     var body: some View {
@@ -40,15 +39,6 @@ struct SettingsView: View {
                                 Text(selectedRight ? "Right" : "Left")
                             }
                         }
-                        Divider().background(Color.accentColor).padding(.vertical,10)
-                        
-                        HStack {
-                            Text("Language:")
-                            Spacer()
-                            Button(action:{ selectedEnglish.toggle() }) {
-                                Text(selectedEnglish ? "English" : "Spanish")
-                            }
-                        }
                     }
                 }
                 Spacer()
@@ -75,7 +65,6 @@ struct SettingsView_Previews: PreviewProvider {
                      showNumbers: Binding.constant(false),
                      duplicateColors: Binding.constant(true),
                      timed: Binding.constant(false),
-                     selectedRight: Binding.constant(true),
-                     selectedEnglish: Binding.constant(true))
+                     selectedRight: Binding.constant(true)).environment(\.locale, Locale(identifier: "es"))
     }
 }

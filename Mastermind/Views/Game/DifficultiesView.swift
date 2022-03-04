@@ -7,7 +7,6 @@ struct DifficultiesView: View {
     @Binding var duplicateColors: Bool
     @Binding var timed: Bool
     @Binding var selectedRight: Bool
-    @Binding var selectedEnglish: Bool
     
     // difficulties array
     private let difficulties = [
@@ -52,7 +51,6 @@ struct DifficultiesView: View {
                                  duplicateColors: $duplicateColors,
                                  timed: $timed,
                                  selectedRight: $selectedRight,
-                                 selectedEnglish: $selectedEnglish,
                                  difficulty: Binding.constant($0),
                                  ran: Binding.constant(duplicateColors ? generateRandom(size: $0.codeSize, max: $0.numColors) : generateUniqueRandom(size: $0.codeSize, max: $0.numColors)))
                     Spacer()
@@ -66,7 +64,7 @@ struct DifficultiesView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack {
-                        Text("Select Difficulty").font(.system(size: 30)).foregroundColor(.accentColor)
+                        Text("Game Modes").font(.system(size: 30)).foregroundColor(.accentColor)
                     }
                 }
                 ToolbarItem(placement: .automatic) {
@@ -75,8 +73,7 @@ struct DifficultiesView: View {
                                                                  showNumbers: $showNumbers,
                                                                  duplicateColors: $duplicateColors,
                                                                  timed: $timed,
-                                                                 selectedRight: $selectedRight,
-                                                                 selectedEnglish: $selectedEnglish)) {
+                                                                 selectedRight: $selectedRight)) {
                             Image(systemName: "gearshape")
                         }
                     }
@@ -94,7 +91,6 @@ struct DifficultiesView_Previews: PreviewProvider {
                          showNumbers: Binding.constant(true),
                          duplicateColors: Binding.constant(true),
                          timed: Binding.constant(true),
-                         selectedRight: Binding.constant(true),
-                         selectedEnglish: Binding.constant(true))
+                         selectedRight: Binding.constant(true)).environment(\.locale, Locale(identifier: "es"))
     }
 }

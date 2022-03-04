@@ -18,35 +18,27 @@ struct InstructionsView: View {
                 VStack(alignment: .leading){
                     Group {
                         Text("Object").font(.title)
-                        Text("Guess the color code in the fewest tries possible.")
-                        Text("After each try clues will be given to you to help you crack the code.")
+                        Text("Object_1").padding(.bottom, 1)
+                        Text("Object_2")
                         Divider().background(Color.accentColor)
                         Text("Gameplay").font(.title)
-                        Text("Assign colors to the empty slots by tapping on the color buttons and confirm your guess with the check button once all slots from each try are filled.")
-                        Text("Each element in the code is evaluated and hints are given as follows:")
+                        Text("Gameplay_1").padding(.bottom, 1)
+                        Text("Gameplay_2")
                         HStack{
-                            Circle()
-                                .frame(width: 6, height: 6)
-                                .foregroundColor(.red)
-                            Text(": one right color in the right place")
+                            FeedbackItem(color: .red, feedbackType: 1)
+                            Text("Gameplay_3")
                         }
                         HStack{
-                            Circle()
-                                .frame(width: 6, height: 6)
-                                .foregroundColor(.white)
-                            Text(": one right color in the wrong place")
-                            
+                            FeedbackItem(color: .white, feedbackType: showNumbers ? 2 : 1)
+                            Text("Gameplay_4")
                         }
-                        
                     }
                     Group {
                         HStack{
-                            Circle()
-                                .frame(width: 6, height: 6)
-                                .foregroundColor(.gray)
-                            Text(": one wrong color")
+                            FeedbackItem(color: .gray, feedbackType: showNumbers ? 3 : 1)
+                            Text("Gameplay_5")
                         }
-                        Text("The above clues are not given in any particular order. You must guess which clue element corresponds to which")
+                        Text("Gameplay_6")
                     }
                     Divider().background(Color.accentColor)
                     Text("Example").font(.title)
@@ -80,12 +72,12 @@ struct InstructionsView: View {
             }
             .foregroundColor(.accentColor)
             .padding()
-            .font(.title3)
+            .font(.system(size: 18))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack {
-                        Text("How to Play").font(.system(size: 30)).foregroundColor(.accentColor)
+                        Text("How to play").font(.system(size: 30)).foregroundColor(.accentColor)
                     }
                 }
             }
@@ -95,6 +87,6 @@ struct InstructionsView: View {
 
 struct InstructionsView_Previews: PreviewProvider {
     static var previews: some View {
-        InstructionsView(showNumbers: Binding.constant(true))
+        InstructionsView(showNumbers: Binding.constant(true)).environment(\.locale, Locale(identifier: "es"))
     }
 }

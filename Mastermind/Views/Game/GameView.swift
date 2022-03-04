@@ -23,8 +23,6 @@ struct GameView: View {
     @Binding var ran: [Int]
     @Binding var selectedRight: Bool
     @Binding var showNumbers: Bool
-    @Binding var selectedEnglish: Bool
-    
     
     var body: some View {
         // initialize code with colors based on random color indexes
@@ -32,113 +30,116 @@ struct GameView: View {
         
         ZStack {
             Rectangle().foregroundColor(background).ignoresSafeArea()
-            VStack {
-                Spacer()
-                Group {
-                    HStack(alignment: .center){
-                        // secret code
-                        ForEach(0..<difficulty.codeSize)  {
-                            // hide code
-                            if (hidden && !lost && !won){
-                                ColorButton(fill: Binding.constant(Color.clear),
-                                            stroke: Binding.constant(Color.gray),
-                                            content: Binding.constant("?"),
-                                            selected: Binding.constant(false))
+            
+                VStack {
+                    Spacer(minLength: 30)
+                    Group {
+                        HStack(alignment: .center){
+                            // secret code
+                            ForEach(0..<difficulty.codeSize)  {
+                                // hide code
+                                if (hidden && !lost && !won){
+                                    ColorButton(fill: Binding.constant(Color.clear),
+                                                stroke: Binding.constant(Color.gray),
+                                                content: Binding.constant("?"),
+                                                selected: Binding.constant(false))
+                                }
+                                // reveal code
+                                else {
+                                    ColorButton(fill: Binding.constant(code[$0]),
+                                                stroke: Binding.constant(code[$0]),
+                                                content: Binding.constant(showNumbers ? String(ran[$0]+1) : ""),
+                                                selected: Binding.constant(false))
+                                }
                             }
-                            // reveal code
-                            else {
-                                ColorButton(fill: Binding.constant(code[$0]),
-                                            stroke: Binding.constant(code[$0]),
-                                            content: Binding.constant(showNumbers ? String(ran[$0]+1) : ""),
-                                            selected: Binding.constant(false))
+                            
+                            // temporary button to reveal secret code
+                            Button(action: {
+                                hidden.toggle()
+                            }){
+                                Image(systemName: hidden ? "eye" : "eye.slash")
                             }
                         }
+                    }
+                    Spacer(minLength: 60)
+                    ScrollView{
+                    HStack{
+                        if (selectedRight){
+                            // place list of attempts to the left of color selector
+                            Spacer()
+                            VStack(alignment: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/){
+                                ForEach(0..<difficulty.maxAttempts){
+                                    AttemptView(selected: $selected,
+                                                attempt: Binding.constant($0),
+                                                currentAttempt: $currAttempt,
+                                                feedback: $feedback,
+                                                codeSize: $difficulty.codeSize,
+                                                attemptColors: $attemptColors,
+                                                attemptNumbers: $attemptNumbers,
+                                                isReadyToSubmit: $isReadyToSubmit,
+                                                showNumbers: $showNumbers
+                                    )
+                                }
+                            }
+                        }
+                        Spacer()
                         
-                        // temporary button to reveal secret code
-                        Button(action: {
-                            hidden.toggle()
-                        }){
-                            Image(systemName: hidden ? "eye" : "eye.slash")
+                        // color selector and submit attempt button
+                        VStack{
+                            ColorSelectorView(numColors: $difficulty.numColors,
+                                              attempt: $currAttempt,
+                                              attemptColors: $attemptColors,
+                                              selected: $selected,
+                                              codeSize: $difficulty.codeSize,
+                                              isReadyToSubmit: $isReadyToSubmit,
+                                              showNumbers: $showNumbers,
+                                              attemptNumbers: $attemptNumbers)
+                            Button(action:{ checkCode(code: code,
+                                                      attempt: currAttempt,
+                                                      attemptColors: attemptColors)}){
+                                ZStack {
+                                    Circle()
+                                        .stroke(Color.accentColor, lineWidth: 2)
+                                        .frame(width: 40, height: 40)
+                                    
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .frame(width: 20.0, height: 20.0).foregroundColor(.accentColor)
+                                }.padding(.top)
+                            }.disabled(!isReadyToSubmit)
                         }
-                    }
-                }
-                Spacer()
-                HStack{
-                    if (selectedRight){
-                        // place list of attempts to the left of color selector
                         Spacer()
-                        VStack(alignment: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/){
-                            ForEach(0..<difficulty.maxAttempts){
-                                AttemptView(selected: $selected,
-                                            attempt: Binding.constant($0),
-                                            currentAttempt: $currAttempt,
-                                            feedback: $feedback,
-                                            codeSize: $difficulty.codeSize,
-                                            attemptColors: $attemptColors,
-                                            attemptNumbers: $attemptNumbers,
-                                            isReadyToSubmit: $isReadyToSubmit,
-                                            showNumbers: $showNumbers
-                                )
+                        
+                        if (!selectedRight){
+                            // place list of attempts to the right of color selector
+                            VStack(alignment: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/){
+                                ForEach(0..<difficulty.maxAttempts){
+                                    AttemptView(selected: $selected,
+                                                attempt: Binding.constant($0),
+                                                currentAttempt: $currAttempt,
+                                                feedback: $feedback,
+                                                codeSize: $difficulty.codeSize,
+                                                attemptColors: $attemptColors,
+                                                attemptNumbers: $attemptNumbers,
+                                                isReadyToSubmit: $isReadyToSubmit,
+                                                showNumbers: $showNumbers
+                                    )
+                                }
                             }
+                            Spacer()
                         }
                     }
                     Spacer()
-                    
-                    // color selector and submit attempt button
-                    VStack{
-                        ColorSelectorView(numColors: $difficulty.numColors,
-                                          attempt: $currAttempt,
-                                          attemptColors: $attemptColors,
-                                          selected: $selected,
-                                          codeSize: $difficulty.codeSize,
-                                          isReadyToSubmit: $isReadyToSubmit,
-                                          showNumbers: $showNumbers,
-                                          attemptNumbers: $attemptNumbers)
-                        Button(action:{ checkCode(code: code,
-                                                  attempt: currAttempt,
-                                                  attemptColors: attemptColors)}){
-                            ZStack {
-                                Circle()
-                                    .stroke(Color.accentColor, lineWidth: 2)
-                                    .frame(width: 40, height: 40)
-                                
-                                Image(systemName: "checkmark")
-                                    .resizable()
-                                    .frame(width: 20.0, height: 20.0).foregroundColor(.accentColor)
-                            }.padding(.top)
-                        }.disabled(!isReadyToSubmit)
-                    }
-                    Spacer()
-                    
-                    if (!selectedRight){
-                        // place list of attempts to the right of color selector
-                        VStack(alignment: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/){
-                            ForEach(0..<difficulty.maxAttempts){
-                                AttemptView(selected: $selected,
-                                            attempt: Binding.constant($0),
-                                            currentAttempt: $currAttempt,
-                                            feedback: $feedback,
-                                            codeSize: $difficulty.codeSize,
-                                            attemptColors: $attemptColors,
-                                            attemptNumbers: $attemptNumbers,
-                                            isReadyToSubmit: $isReadyToSubmit,
-                                            showNumbers: $showNumbers
-                                )
-                            }
-                        }
-                        Spacer()
-                    }
                 }
-                Spacer()
             }
             
             // end game popup
             PopUpWindow(show: $showPopUp,
                         shouldPopToRootView: $shouldPopToRootView,
-                        title: won ? "Congratulations!" : "Game Over",
-                        subTitle: won ? "YOU WIN" : "YOU LOSE",
-                        time: timed ? String(format: "time left\n%d:%02d", minutes, seconds) : "",
-                        attempt: "attempt\(currAttempt <= 1 ? "" : "s")\n\(currAttempt)")
+                        title: won ? "TitleWon" : "TitleLost",
+                        subTitle: won ? "SubTitleWon" : "SubTitleLost",
+                        time: timed ? String(format: "%d:%02d", minutes, seconds) : "",
+                        attempt: currAttempt)
         }
     }
     
@@ -232,7 +233,6 @@ struct GameView_Previews: PreviewProvider {
                  difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Easy", color: .blue)),
                  ran: Binding.constant([1,0,2,2,3,6]),
                  selectedRight: Binding.constant(true),
-                 showNumbers: Binding.constant(false),
-                 selectedEnglish: Binding.constant(true))
+                 showNumbers: Binding.constant(false))
     }
 }

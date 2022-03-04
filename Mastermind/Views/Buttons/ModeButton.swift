@@ -6,7 +6,7 @@ struct ModeButton: View {
     @Binding var color: Color
     
     var body: some View {
-        Text(difficulty)
+        Text(LocalizedStringKey(difficulty))
             .font(.title)
             .frame(width: 100, height: 50)
             .foregroundColor(color)
@@ -18,6 +18,6 @@ struct ModeButton: View {
 struct ModeButton_Previews: PreviewProvider {
     static var previews: some View {
         ModeButton(difficulty: Binding.constant("Hard"),
-                   color: Binding.constant(Color.red))
+                   color: Binding.constant(Color.red)).environment(\.locale, Locale(identifier: "es"))
     }
 }
