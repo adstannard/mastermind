@@ -10,7 +10,7 @@ struct ColorButton: View {
     @State private var wave = true
     
     var body: some View {
-        
+    
         ZStack {
             Circle()
                 .fill(fill)
@@ -39,7 +39,8 @@ struct ColorButton: View {
         }
         .frame(width: 28, height: 28)
         .foregroundColor(content == "?" ? Color.gray : Color(red: 0.0, green: 0.2, blue: 0.2))
-    }
+        }
+        
 }
 
 

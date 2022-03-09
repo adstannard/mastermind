@@ -12,8 +12,12 @@ struct GameView: View {
     @State private var selected: Int = 0
     @State private var hidden: Bool = true
     
+    @AppStorage("sound") private var sound = DefaultSettings.sound
+    @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
+    @AppStorage("timed") private var timed = DefaultSettings.timed
+    @AppStorage("selectedRight") private var selectedRight = DefaultSettings.selectedRight
+    
     @Binding var shouldPopToRootView : Bool
-    @Binding var timed: Bool
     @Binding var minutes: Int
     @Binding var seconds: Int
     @Binding var showPopUp: Bool
@@ -21,8 +25,7 @@ struct GameView: View {
     @Binding var lost: Bool
     @Binding var difficulty: Difficulty
     @Binding var ran: [Int]
-    @Binding var selectedRight: Bool
-    @Binding var showNumbers: Bool
+    
     
     var body: some View {
         // initialize code with colors based on random color indexes
@@ -55,6 +58,11 @@ struct GameView: View {
                             
                             // temporary button to reveal secret code
                             Button(action: {
+                                
+                                // tap sound effect
+                                SoundManager.instance.playSound(soundEffect: hidden ? .reveal : .hide )
+                                
+                                // reveal/hide code
                                 hidden.toggle()
                             }){
                                 Image(systemName: hidden ? "eye" : "eye.slash")
@@ -76,8 +84,7 @@ struct GameView: View {
                                                 codeSize: $difficulty.codeSize,
                                                 attemptColors: $attemptColors,
                                                 attemptNumbers: $attemptNumbers,
-                                                isReadyToSubmit: $isReadyToSubmit,
-                                                showNumbers: $showNumbers
+                                                isReadyToSubmit: $isReadyToSubmit
                                     )
                                 }
                             }
@@ -92,7 +99,6 @@ struct GameView: View {
                                               selected: $selected,
                                               codeSize: $difficulty.codeSize,
                                               isReadyToSubmit: $isReadyToSubmit,
-                                              showNumbers: $showNumbers,
                                               attemptNumbers: $attemptNumbers)
                             Button(action:{ checkCode(code: code,
                                                       attempt: currAttempt,
@@ -121,8 +127,7 @@ struct GameView: View {
                                                 codeSize: $difficulty.codeSize,
                                                 attemptColors: $attemptColors,
                                                 attemptNumbers: $attemptNumbers,
-                                                isReadyToSubmit: $isReadyToSubmit,
-                                                showNumbers: $showNumbers
+                                                isReadyToSubmit: $isReadyToSubmit
                                     )
                                 }
                             }
@@ -145,6 +150,9 @@ struct GameView: View {
     
     // check attempt, check if game was won or lost, and advance to next attempt
     func checkCode(code: [Color], attempt: Int, attemptColors: [[Color]]) {
+        
+        // tap sound effect
+        SoundManager.instance.playSound(soundEffect: .tap1)
         
         // rightly positioned colors counter
         var right = 0
@@ -203,14 +211,15 @@ struct GameView: View {
             won = true
             hidden = false
             showPopUp = true
+            SoundManager.instance.playSound(soundEffect: .win)
         }
         
         // lost game
-        if ((currAttempt >= difficulty.maxAttempts-1 && right != difficulty.codeSize) || (
-            minutes==0 && seconds==0)){
+        if (currAttempt >= difficulty.maxAttempts-1 && right != difficulty.codeSize){
             lost = true
             hidden = false
             showPopUp = true
+            SoundManager.instance.playSound(soundEffect: .lose)
         }
         
         // advance to next attempt and reset values accordingly
@@ -224,15 +233,12 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(shouldPopToRootView:  Binding.constant(false),
-                 timed: Binding.constant(false),
                  minutes:Binding.constant(2),
                  seconds: Binding.constant(0),
                  showPopUp: Binding.constant(false),
                  won: Binding.constant(false),
                  lost: Binding.constant(false),
                  difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Easy", color: .blue)),
-                 ran: Binding.constant([1,0,2,2,3,6]),
-                 selectedRight: Binding.constant(true),
-                 showNumbers: Binding.constant(false))
+                 ran: Binding.constant([1,0,2,2,3,6]))
     }
 }

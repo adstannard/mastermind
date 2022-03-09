@@ -14,6 +14,7 @@ struct ColorSelectorItem: View {
     @Binding var showNumbers: Bool
     
     
+    
     var body: some View {
         Button(action: assignColor){
             ColorButton(fill: $color,
@@ -38,6 +39,9 @@ struct ColorSelectorItem: View {
     
     func assignColor() {
         
+        // button tap sound effect
+        SoundManager.instance.playSound(soundEffect: .tap2)
+        
         // assign color to selected item
         attemptColors[attempt][selected] = color
         
@@ -58,6 +62,8 @@ struct ColorSelectorItem: View {
         isReadyToSubmit = canSubmit
         
     }
+    
+    
 }
 
 

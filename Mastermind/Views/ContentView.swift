@@ -4,42 +4,29 @@ struct ContentView: View {
     
     private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
     @State var isActive : Bool = false
-    @State var sound: Bool = true
-    @State var showNumbers: Bool = false
-    @State var duplicateColors: Bool = true
-    @State var timed: Bool = true
-    @State var selectedRight: Bool = true
-   
+    
+    @State private var action: Int? = 0
     
     var body: some View {
         NavigationView {
+            
             ZStack {
                 background.edgesIgnoringSafeArea(.all)
-                VStack {
+                VStack () {
                     Spacer()
-                    NavigationLink(destination:  DifficultiesView(rootIsActive: self.$isActive,
-                                                                  sound: $sound,
-                                                                  showNumbers: $showNumbers,
-                                                                  duplicateColors: $duplicateColors,
-                                                                  timed: $timed,
-                                                                  selectedRight: $selectedRight),
+                    NavigationLink(destination: DifficultiesView(rootIsActive: self.$isActive),
                                    isActive: self.$isActive) {
-                       PlayButton()
+                        PlayButton(isActive: self.$isActive)
                     }
                     Spacer()
-                    NavigationLink(destination: SettingsView(sound: $sound,
-                                                             showNumbers: $showNumbers,
-                                                             duplicateColors: $duplicateColors,
-                                                             timed: $timed,
-                                                             selectedRight: $selectedRight)) {
-                        Image(systemName: "gearshape.2")
-                            .resizable()
-                            .frame(width: 32, height: 25)
-                            .background(RoundedRectangle(cornerRadius: 4)
-                                            .stroke(Color.accentColor, lineWidth: 2)
-                                            .frame(width: 60, height: 50))
-                            .padding()
+                    NavigationLink(destination: SettingsView(), tag: 1, selection: $action) {
+                        EmptyView()
                     }
+                    SettingsButton()
+                        .onTapGesture {
+                            self.action = 1
+                            SoundManager.instance.playSound(soundEffect: .tap4)
+                        }
                 }
                 .zIndex(2)
                 .foregroundColor(.accentColor)
@@ -59,6 +46,14 @@ struct ContentView: View {
     }
 }
 
+
+enum DefaultSettings {
+    static let sound = true
+    static let showNumbers = false
+    static let duplicateColors = true
+    static let timed = true
+    static let selectedRight = true
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

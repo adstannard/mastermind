@@ -1,15 +1,9 @@
-//
-//  PlayButton.swift
-//  Mastermind
-//
-//  Created by Leanet Alfonso Azcona on 3/3/22.
-//
-
 import SwiftUI
 
 struct PlayButton: View {
     
     @State private var wave = true
+    @Binding var isActive: Bool
     
     var body: some View {
         Image(systemName: "play")
@@ -21,7 +15,6 @@ struct PlayButton: View {
             .padding()
             .opacity(wave ? 1 : 0.3)
             .onAppear() {
-                wave.toggle()
                 withAnimation(
                     .easeInOut(duration: 1)
                         .repeatForever(autoreverses: true)
@@ -29,11 +22,16 @@ struct PlayButton: View {
                             wave.toggle()
                         }
             }
+            .onTapGesture(perform: {
+                isActive = true
+                SoundManager.instance.playSound(soundEffect: .tap4)
+            }
+            )
     }
 }
 
 struct PlayButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlayButton()
+        PlayButton(isActive: Binding.constant(false))
     }
 }

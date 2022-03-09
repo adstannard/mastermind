@@ -2,7 +2,8 @@ import SwiftUI
 
 struct InstructionsView: View {
     
-    @Binding var showNumbers: Bool
+    @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
+
     private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
     private let colors = [Color.red, Color.orange, Color.blue, Color.green, Color.yellow, Color.purple]
     
@@ -62,8 +63,7 @@ struct InstructionsView: View {
                                         feedback: Binding.constant([[.red,.white,.white,.gray,.gray]]),
                                         codeSize: Binding.constant(5),
                                         attemptColors: Binding.constant([[.green,.yellow,.yellow,.purple,.blue]]), attemptNumbers: showNumbers ? Binding.constant([["4","5","5","6","3"]]) :  Binding.constant([["","","","",""]]),
-                                        isReadyToSubmit: Binding.constant(true),
-                                        showNumbers: $showNumbers
+                                        isReadyToSubmit: Binding.constant(true)
                             ).disabled(true).font(.system(size: 17))
                         }
                     }
@@ -87,6 +87,6 @@ struct InstructionsView: View {
 
 struct InstructionsView_Previews: PreviewProvider {
     static var previews: some View {
-        InstructionsView(showNumbers: Binding.constant(true)).environment(\.locale, Locale(identifier: "es"))
+        InstructionsView().environment(\.locale, Locale(identifier: "es"))
     }
 }
