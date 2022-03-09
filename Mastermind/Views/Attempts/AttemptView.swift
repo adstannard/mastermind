@@ -10,7 +10,9 @@ struct AttemptView: View {
     @Binding var attemptColors: [[Color]]
     @Binding var attemptNumbers: [[String]]
     @Binding var isReadyToSubmit: Bool
-    @Binding var showNumbers: Bool
+
+    @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
+
     
     
     func select(position:Int) {
@@ -54,7 +56,7 @@ struct AttemptView_Previews: PreviewProvider {
                     codeSize:Binding.constant(6),
                     attemptColors: Binding.constant([[.blue,.red,.blue,.white,.green,.green]]),
                     attemptNumbers: Binding.constant([["2","3","2","4","1","1"]]),
-                    isReadyToSubmit: Binding.constant(false),
-                    showNumbers: Binding.constant(true)).background(Color.black)
+                    isReadyToSubmit: Binding.constant(false))
     }
 }
+                    

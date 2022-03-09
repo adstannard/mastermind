@@ -18,7 +18,7 @@ struct ColorButton: View {
                 Circle()
                     .strokeBorder(stroke, lineWidth: 2)
                     .padding(.all, 0.0)
-                    .scaleEffect(wave && (fill != Color.clear) ? 1.25 : 1)
+                    .scaleEffect(wave && (fill != Color.clear) ? 1.2 : 1)
                     .opacity(wave ? 1 : 0.3)
                     .onAppear() {
                         self.wave.toggle()
@@ -40,6 +40,7 @@ struct ColorButton: View {
         .frame(width: 28, height: 28)
         .foregroundColor(content == "?" ? Color.gray : Color(red: 0.0, green: 0.2, blue: 0.2))
     }
+    
 }
 
 

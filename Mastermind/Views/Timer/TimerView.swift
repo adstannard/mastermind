@@ -35,6 +35,7 @@ struct TimerView: View {
                     else {
                         lost = true
                         timer.upstream.connect().cancel()
+                        SoundManager.instance.playSound(soundEffect: .lose)
                         showPopUp = true
                     }
                 }

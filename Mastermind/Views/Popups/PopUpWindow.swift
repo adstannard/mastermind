@@ -14,6 +14,7 @@ struct PopUpWindow: View {
     var body: some View {
         ZStack {
             if show {
+                
                 Color.black.opacity(show ? 0.4 : 0).edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .center, spacing: 0) {

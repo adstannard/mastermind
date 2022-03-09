@@ -3,11 +3,13 @@ import SwiftUI
 struct SettingsView: View {
     
     private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
-    @Binding var sound: Bool
-    @Binding var showNumbers: Bool
-    @Binding var duplicateColors: Bool
-    @Binding var timed: Bool
-    @Binding var selectedRight: Bool
+    
+    
+    @AppStorage("sound") private var sound = DefaultSettings.sound
+    @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
+    @AppStorage("duplicateColors") private var duplicateColors = DefaultSettings.duplicateColors
+    @AppStorage("timed") private var timed = DefaultSettings.timed
+    @AppStorage("selectedRight") private var selectedRight = DefaultSettings.selectedRight
     
     
     var body: some View {
@@ -15,7 +17,7 @@ struct SettingsView: View {
             Rectangle().foregroundColor(background).ignoresSafeArea()
             VStack(alignment: .leading) {
                 Group {
-                    NavigationLink(destination: InstructionsView(showNumbers: $showNumbers)) {
+                    NavigationLink(destination: InstructionsView()) {
                         HStack {
                             Text("How to play")
                         }
@@ -61,10 +63,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(sound: Binding.constant(false),
-                     showNumbers: Binding.constant(false),
-                     duplicateColors: Binding.constant(true),
-                     timed: Binding.constant(false),
-                     selectedRight: Binding.constant(true)).environment(\.locale, Locale(identifier: "es"))
+        SettingsView().environment(\.locale, Locale(identifier: "es"))
     }
 }

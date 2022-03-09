@@ -9,9 +9,10 @@ struct ColorSelectorView: View {
     @Binding var selected: Int
     @Binding var codeSize: Int
     @Binding var isReadyToSubmit:Bool
-    @Binding var showNumbers: Bool
     @Binding var attemptNumbers: [[String]]
     
+    @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
+
     var body: some View {
         HStack{
             ZStack{
@@ -35,7 +36,7 @@ struct ColorSelectorView: View {
                             .padding(.all, 5)
                     }
                 }
-            }
+            }.padding(.top,2)
         }
     }
 }
@@ -48,7 +49,6 @@ struct ColorSelectorView_Previews: PreviewProvider {
                           selected:Binding.constant(2),
                           codeSize: Binding.constant(4),
                           isReadyToSubmit:Binding.constant(false),
-                          showNumbers: Binding.constant(true),
                           attemptNumbers: Binding.constant([["0", "3", "2", "2"]]))
         
     }

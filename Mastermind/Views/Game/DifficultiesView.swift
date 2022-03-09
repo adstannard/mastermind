@@ -2,11 +2,13 @@ import SwiftUI
 
 struct DifficultiesView: View {
     @Binding var rootIsActive: Bool
-    @Binding var sound: Bool
-    @Binding var showNumbers: Bool
-    @Binding var duplicateColors: Bool
-    @Binding var timed: Bool
-    @Binding var selectedRight: Bool
+    @State var isSettingsActive: Bool = false
+    
+    @AppStorage("sound") private var sound = DefaultSettings.sound
+    @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
+    @AppStorage("duplicateColors") private var duplicateColors = DefaultSettings.duplicateColors
+    @AppStorage("timed") private var timed = DefaultSettings.timed
+    @AppStorage("selectedRight") private var selectedRight = DefaultSettings.selectedRight
     
     // difficulties array
     private let difficulties = [
@@ -46,11 +48,6 @@ struct DifficultiesView: View {
                 Spacer()
                 ForEach(difficulties, id: \.self) {
                     GameModeLink(shouldPopToRootView: $rootIsActive,
-                                 sound: $sound,
-                                 showNumbers: $showNumbers,
-                                 duplicateColors: $duplicateColors,
-                                 timed: $timed,
-                                 selectedRight: $selectedRight,
                                  difficulty: Binding.constant($0),
                                  ran: Binding.constant(duplicateColors ? generateRandom(size: $0.codeSize, max: $0.numColors) : generateUniqueRandom(size: $0.codeSize, max: $0.numColors)))
                     Spacer()
@@ -69,12 +66,12 @@ struct DifficultiesView: View {
                 }
                 ToolbarItem(placement: .automatic) {
                     VStack {
-                        NavigationLink(destination: SettingsView(sound: $sound,
-                                                                 showNumbers: $showNumbers,
-                                                                 duplicateColors: $duplicateColors,
-                                                                 timed: $timed,
-                                                                 selectedRight: $selectedRight)) {
+                        NavigationLink(destination: SettingsView(), isActive:self.$isSettingsActive) {
                             Image(systemName: "gearshape")
+                                .onTapGesture {
+                                    isSettingsActive = true
+                                    SoundManager.instance.playSound(soundEffect: .tap4)
+                                }
                         }
                     }
                 }
@@ -86,11 +83,6 @@ struct DifficultiesView: View {
 
 struct DifficultiesView_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultiesView(rootIsActive: Binding.constant(false),
-                         sound: Binding.constant(true),
-                         showNumbers: Binding.constant(true),
-                         duplicateColors: Binding.constant(true),
-                         timed: Binding.constant(true),
-                         selectedRight: Binding.constant(true)).environment(\.locale, Locale(identifier: "es"))
+        DifficultiesView(rootIsActive: Binding.constant(false)).environment(\.locale, Locale(identifier: "es"))
     }
 }

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D32B34DD27D7EED8006B7B3C /* tap1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34DB27D7EED8006B7B3C /* tap1.mp3 */; };
+		D32B34DE27D7EED8006B7B3C /* tap2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34DC27D7EED8006B7B3C /* tap2.mp3 */; };
+		D32B34E127D801C5006B7B3C /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34DF27D801C5006B7B3C /* win.mp3 */; };
+		D32B34E627D80474006B7B3C /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34E527D80474006B7B3C /* lose.mp3 */; };
+		D32B34E827D80537006B7B3C /* tap3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34E727D80537006B7B3C /* tap3.mp3 */; };
+		D32B34EA27D806DB006B7B3C /* reveal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34E927D806DA006B7B3C /* reveal.mp3 */; };
+		D32B34EC27D80B05006B7B3C /* hide.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32B34EB27D80B04006B7B3C /* hide.mp3 */; };
+		D32B34EE27D80C0A006B7B3C /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B34ED27D80C0A006B7B3C /* SettingsButton.swift */; };
+		D32DD40F27D872B80090077D /* tap4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D32DD40E27D872B80090077D /* tap4.mp3 */; };
 		D32FD4F727B3304500CC43AC /* MastermindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32FD4F627B3304500CC43AC /* MastermindApp.swift */; };
 		D32FD4F927B3304500CC43AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32FD4F827B3304500CC43AC /* ContentView.swift */; };
 		D32FD4FB27B3304800CC43AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D32FD4FA27B3304800CC43AC /* Assets.xcassets */; };
@@ -17,7 +26,9 @@
 		D32FD50B27B330F100CC43AC /* ColorSelectorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32FD50A27B330F100CC43AC /* ColorSelectorItem.swift */; };
 		D32FD50D27B3311400CC43AC /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32FD50C27B3311400CC43AC /* FeedbackView.swift */; };
 		D32FD50F27B3312900CC43AC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32FD50E27B3312900CC43AC /* GameView.swift */; };
+		D34E296827D6D258006EEEDF /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E296727D6D258006EEEDF /* SoundManager.swift */; };
 		D3563FD127B33C9200B7BF89 /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3563FD027B33C9200B7BF89 /* ColorButton.swift */; };
+		D3675B5C27D87F8400D70FCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3675B5B27D87F8400D70FCA /* LaunchScreen.storyboard */; };
 		D38C397F27C99A9B004125AA /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C397E27C99A9B004125AA /* PopUpWindow.swift */; };
 		D3AC5F0327D17136000710A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3AC5F0527D17136000710A2 /* Localizable.strings */; };
 		D3AC5F0927D17806000710A2 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC5F0827D17806000710A2 /* PlayButton.swift */; };
@@ -46,6 +57,15 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		D32B34DB27D7EED8006B7B3C /* tap1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap1.mp3; sourceTree = "<group>"; };
+		D32B34DC27D7EED8006B7B3C /* tap2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap2.mp3; sourceTree = "<group>"; };
+		D32B34DF27D801C5006B7B3C /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		D32B34E527D80474006B7B3C /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = lose.mp3; path = ../../../../Downloads/lose.mp3; sourceTree = "<group>"; };
+		D32B34E727D80537006B7B3C /* tap3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap3.mp3; sourceTree = "<group>"; };
+		D32B34E927D806DA006B7B3C /* reveal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reveal.mp3; sourceTree = "<group>"; };
+		D32B34EB27D80B04006B7B3C /* hide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hide.mp3; sourceTree = "<group>"; };
+		D32B34ED27D80C0A006B7B3C /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
+		D32DD40E27D872B80090077D /* tap4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap4.mp3; sourceTree = "<group>"; };
 		D32FD4F327B3304500CC43AC /* Mastermind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mastermind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D32FD4F627B3304500CC43AC /* MastermindApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindApp.swift; sourceTree = "<group>"; };
 		D32FD4F827B3304500CC43AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,7 +77,9 @@
 		D32FD50A27B330F100CC43AC /* ColorSelectorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorItem.swift; sourceTree = "<group>"; };
 		D32FD50C27B3311400CC43AC /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		D32FD50E27B3312900CC43AC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		D34E296727D6D258006EEEDF /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		D3563FD027B33C9200B7BF89 /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
+		D3675B5B27D87F8400D70FCA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D38C397E27C99A9B004125AA /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		D3AC5F0427D17136000710A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D3AC5F0627D1713A000710A2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -102,11 +124,14 @@
 		D32FD4F527B3304500CC43AC /* Mastermind */ = {
 			isa = PBXGroup;
 			children = (
+				D34E296627D6CEB6006EEEDF /* Sounds */,
 				D3D022A827C6EB7B00A1ADDD /* Model */,
 				D3D0229D27C6E26600A1ADDD /* Views */,
 				D32FD4F627B3304500CC43AC /* MastermindApp.swift */,
 				D32FD4FA27B3304800CC43AC /* Assets.xcassets */,
 				D32FD4FC27B3304800CC43AC /* Preview Content */,
+				D34E296727D6D258006EEEDF /* SoundManager.swift */,
+				D3675B5B27D87F8400D70FCA /* LaunchScreen.storyboard */,
 			);
 			path = Mastermind;
 			sourceTree = "<group>";
@@ -117,6 +142,21 @@
 				D32FD4FD27B3304800CC43AC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D34E296627D6CEB6006EEEDF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				D32B34DF27D801C5006B7B3C /* win.mp3 */,
+				D32B34E527D80474006B7B3C /* lose.mp3 */,
+				D32B34DB27D7EED8006B7B3C /* tap1.mp3 */,
+				D32B34DC27D7EED8006B7B3C /* tap2.mp3 */,
+				D32B34E727D80537006B7B3C /* tap3.mp3 */,
+				D32DD40E27D872B80090077D /* tap4.mp3 */,
+				D32B34E927D806DA006B7B3C /* reveal.mp3 */,
+				D32B34EB27D80B04006B7B3C /* hide.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		D37FFD9427C84701000C79FC /* Instructions */ = {
@@ -187,6 +227,7 @@
 				D3563FD027B33C9200B7BF89 /* ColorButton.swift */,
 				D3B72CB527B5B38E003120D7 /* ModeButton.swift */,
 				D3AC5F0827D17806000710A2 /* PlayButton.swift */,
+				D32B34ED27D80C0A006B7B3C /* SettingsButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -276,8 +317,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D32B34DD27D7EED8006B7B3C /* tap1.mp3 in Resources */,
+				D32B34DE27D7EED8006B7B3C /* tap2.mp3 in Resources */,
 				D32FD4FE27B3304800CC43AC /* Preview Assets.xcassets in Resources */,
+				D32B34E127D801C5006B7B3C /* win.mp3 in Resources */,
+				D32DD40F27D872B80090077D /* tap4.mp3 in Resources */,
+				D32B34E627D80474006B7B3C /* lose.mp3 in Resources */,
+				D32B34EA27D806DB006B7B3C /* reveal.mp3 in Resources */,
+				D32B34EC27D80B05006B7B3C /* hide.mp3 in Resources */,
 				D3AC5F0327D17136000710A2 /* Localizable.strings in Resources */,
+				D3675B5C27D87F8400D70FCA /* LaunchScreen.storyboard in Resources */,
+				D32B34E827D80537006B7B3C /* tap3.mp3 in Resources */,
 				D32FD4FB27B3304800CC43AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D32FD50D27B3311400CC43AC /* FeedbackView.swift in Sources */,
+				D32B34EE27D80C0A006B7B3C /* SettingsButton.swift in Sources */,
 				D32FD50527B3309B00CC43AC /* AttemptView.swift in Sources */,
 				D32FD50B27B330F100CC43AC /* ColorSelectorItem.swift in Sources */,
 				D32FD4F927B3304500CC43AC /* ContentView.swift in Sources */,
@@ -298,6 +349,7 @@
 				D3B72CBA27B5D781003120D7 /* SettingsView.swift in Sources */,
 				D3B72CB627B5B38E003120D7 /* ModeButton.swift in Sources */,
 				D3AC5F0927D17806000710A2 /* PlayButton.swift in Sources */,
+				D34E296827D6D258006EEEDF /* SoundManager.swift in Sources */,
 				D32FD50727B330C100CC43AC /* AttemptItem.swift in Sources */,
 				D3B72CBE27B624CA003120D7 /* FeedbackItem.swift in Sources */,
 				D32FD4F727B3304500CC43AC /* MastermindApp.swift in Sources */,
@@ -458,6 +510,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
@@ -488,6 +541,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
