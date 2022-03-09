@@ -14,16 +14,16 @@ struct AttemptItem: View {
         
         Button(action: {
             selected = position
+            SoundManager.instance.playSound(soundEffect: .tap2)
         }){
             ColorButton(fill: $color,
-                            stroke: (currentAttempt == attempt  && selected == position) ?
-                            Binding.constant(Color.white) : color == Color.clear ?
-                            Binding.constant(Color.gray): Binding.constant(Color.clear),
-                            content: $content,
-                            selected: Binding.constant(currentAttempt == attempt  && selected == position))
-        }
+                        stroke: (currentAttempt == attempt  && selected == position) ?
+                        Binding.constant(Color.white) : color == Color.clear ?
+                        Binding.constant(Color.gray): Binding.constant(Color.clear),
+                        content: $content,
+                        selected: Binding.constant(currentAttempt == attempt  && selected == position))
+        }.padding(.top, 3)
         .disabled(currentAttempt != attempt)
-        
     }
 }
 

@@ -36,7 +36,7 @@ struct ColorSelectorView: View {
                             .padding(.all, 5)
                     }
                 }
-            }
+            }.padding(.top,2)
         }
     }
 }

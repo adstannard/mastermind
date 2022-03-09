@@ -92,7 +92,7 @@ struct GameView: View {
                         Spacer()
                         
                         // color selector and submit attempt button
-                        VStack{
+                        VStack {
                             ColorSelectorView(numColors: $difficulty.numColors,
                                               attempt: $currAttempt,
                                               attemptColors: $attemptColors,
@@ -135,7 +135,7 @@ struct GameView: View {
                         }
                     }
                     Spacer()
-                }
+                    }
             }
             
             // end game popup

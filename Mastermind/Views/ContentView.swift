@@ -37,7 +37,9 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         VStack {
-                            Text("MASTERMIND").font(.system(size: 30)).foregroundColor(.accentColor)
+                            Text("MASTERMIND")
+                                .font(.system(size: 30))
+                                .foregroundColor(.accentColor)
                         }
                     }
                 }
