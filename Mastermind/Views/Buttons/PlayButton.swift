@@ -15,6 +15,7 @@ struct PlayButton: View {
             .padding()
             .opacity(wave ? 1 : 0.3)
             .onAppear() {
+                wave.toggle()
                 withAnimation(
                     .easeInOut(duration: 1)
                         .repeatForever(autoreverses: true)
