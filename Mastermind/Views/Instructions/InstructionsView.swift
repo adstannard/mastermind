@@ -3,68 +3,81 @@ import SwiftUI
 struct InstructionsView: View {
     
     @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
-
-    private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
-    private let colors = [Color.red, Color.orange, Color.blue, Color.green, Color.yellow, Color.purple]
-    
     
     var body: some View {
         
-        let numbers = [3,0,2,0,4]
-        let code = numbers.map {(index) -> Color in colors[index]}
+        let numbers = [3, 0, 2, 0, 4]
+        let code = numbers.map {(index) -> Color in Constants.colors[index]}
         
         ZStack {
-            Rectangle().foregroundColor(background).ignoresSafeArea()
+            // background
+            Color.theme.background.edgesIgnoringSafeArea(.all)
+            
             ScrollView{
                 VStack(alignment: .leading){
+                    // Object
                     Group {
                         Text("Object").font(.title)
                         Text("Object_1").padding(.bottom, 1)
                         Text("Object_2")
                         Divider().background(Color.accentColor)
+                    }
+                    
+                    // Gameplay
+                    Group {
                         Text("Gameplay").font(.title)
                         Text("Gameplay_1").padding(.bottom, 1)
                         Text("Gameplay_2")
+                        
+                        // right color and position
                         HStack{
                             FeedbackItem(color: .red, feedbackType: 1)
                             Text("Gameplay_3")
                         }
+                        // right color, wrong position
                         HStack{
                             FeedbackItem(color: .white, feedbackType: showNumbers ? 2 : 1)
                             Text("Gameplay_4")
                         }
-                    }
-                    Group {
+                        // wrong color
                         HStack{
                             FeedbackItem(color: .gray, feedbackType: showNumbers ? 3 : 1)
                             Text("Gameplay_5")
                         }
+                        
                         Text("Gameplay_6")
+                        Divider().background(Color.accentColor)
                     }
-                    Divider().background(Color.accentColor)
-                    Text("Example").font(.title)
-                    HStack{
-                        VStack{
-                            HStack{
-                                ForEach(0..<5)  {
-                                    ColorButton(fill: Binding.constant(code[$0]),
-                                                stroke: Binding.constant(code[$0]),
-                                                content: Binding.constant(showNumbers ? String(numbers[$0]+1) : ""),
-                                                selected: Binding.constant(false))
-                                        .padding(.horizontal, 3).font(.system(size: 17))
-                                    
-                                }}
-                            
-                            Divider().background(Color.accentColor).padding(.horizontal, 40)
-                            
-                            AttemptView(selected: Binding.constant(5),
-                                        attempt: Binding.constant(0),
-                                        currentAttempt: Binding.constant(0),
-                                        feedback: Binding.constant([[.red,.white,.white,.gray,.gray]]),
-                                        codeSize: Binding.constant(5),
-                                        attemptColors: Binding.constant([[.green,.yellow,.yellow,.purple,.blue]]), attemptNumbers: showNumbers ? Binding.constant([["4","5","5","6","3"]]) :  Binding.constant([["","","","",""]]),
-                                        isReadyToSubmit: Binding.constant(true)
-                            ).disabled(true).font(.system(size: 17))
+                    
+                    
+                    // Example
+                    Group {
+                        Text("Example").font(.title)
+                        HStack {
+                            Spacer()
+                            VStack {
+                                // secret code
+                                HStack {
+                                    ForEach(0..<5) {
+                                        ColorButton(fill: Binding.constant(code[$0]),
+                                                    stroke: Binding.constant(code[$0]),
+                                                    content: Binding.constant(showNumbers ? String(numbers[$0]+1) : ""),
+                                                    selected: Binding.constant(false))
+                                            .padding(.horizontal, 3).font(.system(size: 17))
+                                    }
+                                }
+                                Divider().frame(width: 260).background(Color.accentColor)
+                                
+                                // sample attempt with feedback
+                                AttemptView(selected: Binding.constant(5),
+                                            attempt: Binding.constant(0),
+                                            currentAttempt: Binding.constant(0),
+                                            feedback: Binding.constant([[.red,.white,.white,.gray,.gray]]),
+                                            codeSize: Binding.constant(5),
+                                            attemptColors: Binding.constant([[Constants.colors[3],Constants.colors[4],Constants.colors[4],Constants.colors[5],Constants.colors[2]]]), attemptNumbers: showNumbers ? Binding.constant([["4","5","5","6","3"]]) :  Binding.constant([["","","","",""]])
+                                ).disabled(true).font(.system(size: 17))
+                            }
+                            Spacer()
                         }
                     }
                     Spacer()
@@ -75,6 +88,7 @@ struct InstructionsView: View {
             .font(.system(size: 18))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                // screen title
                 ToolbarItem(placement: .principal) {
                     VStack {
                         Text("How to play").font(.system(size: 30)).foregroundColor(.accentColor)
@@ -87,6 +101,6 @@ struct InstructionsView: View {
 
 struct InstructionsView_Previews: PreviewProvider {
     static var previews: some View {
-        InstructionsView().environment(\.locale, Locale(identifier: "es"))
+        InstructionsView()
     }
 }

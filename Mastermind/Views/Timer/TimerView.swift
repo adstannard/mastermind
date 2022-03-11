@@ -12,32 +12,34 @@ struct TimerView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        
-        Text(String(format: "%d:%02d", minutes[i], seconds)).foregroundColor(.accentColor).bold().onReceive(timer) { _ in
+        Text(String(format: "%d:%02d", minutes[i], seconds))
+            .foregroundColor(.accentColor)
+            .bold()
+            .onReceive(timer)
+        { _ in
             
             if (!lost){
+                // stop timer
                 if (won) {
                     timer.upstream.connect().cancel()
                 }
-                else if (minutes[i] > 0) {
+                else if (minutes[i] > 0 || seconds > 0) {
+                    // deduct a second
                     if (seconds > 0) {
                         seconds -= 1
                     }
+                    // deduct a minute and reset seconds to 59
                     else {
                         seconds = 59
                         minutes[i] -= 1
                     }
                 }
-                else if (minutes[i] == 0) {
-                    if (seconds > 0) {
-                        seconds -= 1
-                    }
-                    else {
-                        lost = true
-                        timer.upstream.connect().cancel()
-                        SoundManager.instance.playSound(soundEffect: .lose)
-                        showPopUp = true
-                    }
+                // no time left (stop timer, show popup, play lose sound)
+                else  {
+                    lost = true
+                    timer.upstream.connect().cancel()
+                    SoundManager.instance.playSound(soundEffect: .lose)
+                    showPopUp = true
                 }
             }
             else {
@@ -50,9 +52,9 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(minutes:Binding.constant([2, 4]),
+        TimerView(minutes:Binding.constant([1, 4]),
                   seconds: Binding.constant(0),
-                  i: Binding.constant(1),
+                  i: Binding.constant(0),
                   showPopUp: Binding.constant(false),
                   lost: Binding.constant(false),
                   won: Binding.constant(false))

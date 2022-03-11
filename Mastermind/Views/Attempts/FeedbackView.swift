@@ -8,7 +8,7 @@ struct FeedbackView: View {
     @Binding var showNumbers: Bool
     
     var body: some View {
-        
+        // four feedback items
         if (codeSize == 4) {
             ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom), content: {
                 ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top), content: {
@@ -26,6 +26,7 @@ struct FeedbackView: View {
                 getFeedbackItem(position: 2)
             })
         }
+        // five feedback items
         if (codeSize == 5){
             ZStack {
                 ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom), content: {
@@ -46,6 +47,7 @@ struct FeedbackView: View {
                 getFeedbackItem(position: 2)
             }
         }
+        // six feedback items
         if (codeSize == 6) {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .center), content: {
                 ZStack(alignment: Alignment(horizontal: .leading, vertical: .center), content: {
@@ -71,13 +73,14 @@ struct FeedbackView: View {
         }
     }
     
+    
+    // Gets feedback item
     func getFeedbackItem (position: Int) -> FeedbackItem {
         
         let color = feedback[attempt][position]
         var type: Int
         
         if (showNumbers) {
-            
             switch color {
             case Color.red :
                 type = 1
@@ -89,11 +92,9 @@ struct FeedbackView: View {
                 type = 1
             }
         }
-        
         else {
             type = 1
         }
-        
         return FeedbackItem(color: color, feedbackType: type)
     }
 }

@@ -9,24 +9,18 @@ struct AttemptView: View {
     @Binding var codeSize: Int
     @Binding var attemptColors: [[Color]]
     @Binding var attemptNumbers: [[String]]
-    @Binding var isReadyToSubmit: Bool
-
+    
     @AppStorage("showNumbers") private var showNumbers = DefaultSettings.showNumbers
-
-    
-    
-    func select(position:Int) {
-        selected = position
-    }
     
     var body: some View {
-        
         HStack{
+            // attempt number
             Text(String(attempt+1))
                 .font(.system(size: 20, weight: .semibold, design: .default))
-                .foregroundColor(currentAttempt == attempt ? Color(red: 0.0, green: 0.8, blue: 0.8) : currentAttempt > attempt ? Color(red: 0.0, green: 0.5, blue: 0.5) : Color.gray)
+                .foregroundColor(currentAttempt == attempt ? .accentColor : currentAttempt > attempt ? Color.theme.secondaryAccent : Color.gray)
                 .frame(alignment: .topLeading)
             
+            // attempt items
             ForEach(0..<codeSize) {
                 Spacer().frame(maxWidth: CGFloat(70/codeSize))
                 AttemptItem(
@@ -37,7 +31,7 @@ struct AttemptView: View {
                     color: $attemptColors[attempt][$0],
                     content: showNumbers ? $attemptNumbers[attempt][$0] : Binding.constant(""))
             }
-            
+            // attempt feedback
             FeedbackView(feedback: $feedback,
                          codeSize:$codeSize,
                          attempt: $attempt,
@@ -55,8 +49,7 @@ struct AttemptView_Previews: PreviewProvider {
                     feedback:Binding.constant([[Color.red,Color.red,Color.white,Color.gray,Color.gray,Color.gray]]),
                     codeSize:Binding.constant(6),
                     attemptColors: Binding.constant([[.blue,.red,.blue,.white,.green,.green]]),
-                    attemptNumbers: Binding.constant([["2","3","2","4","1","1"]]),
-                    isReadyToSubmit: Binding.constant(false))
+                    attemptNumbers: Binding.constant([["2","3","2","4","1","1"]]))
     }
 }
-                    
+

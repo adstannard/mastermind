@@ -10,10 +10,10 @@ struct ColorButton: View {
     @State private var wave = true
     
     var body: some View {
-        
         ZStack {
             Circle()
                 .fill(fill)
+            // ease in and out if selected
             if (selected) {
                 Circle()
                     .strokeBorder(stroke, lineWidth: 2)
@@ -30,6 +30,7 @@ struct ColorButton: View {
                                 }
                     }
             }
+            // static if not selected
             else {
                 Circle()
                     .strokeBorder(stroke, lineWidth: 2)
@@ -38,9 +39,8 @@ struct ColorButton: View {
             Text(content)
         }
         .frame(width: 28, height: 28)
-        .foregroundColor(content == "?" ? Color.gray : Color(red: 0.0, green: 0.2, blue: 0.2))
+        .foregroundColor(content == "?" ? Color.gray : Color.theme.background)
     }
-    
 }
 
 

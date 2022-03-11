@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GameModeLink: View {
-  
+    
     @AppStorage("timed") private var timed = DefaultSettings.timed
     
     @Binding var shouldPopToRootView : Bool
@@ -14,12 +14,9 @@ struct GameModeLink: View {
     @State var lost: Bool = false
     @State var won: Bool = false
     @State private var action: Int? = 0
-    
     @State var gameModeActive : Bool = false
     
     var body: some View {
-        
-        
         NavigationLink(destination: GameView(shouldPopToRootView: $shouldPopToRootView,
                                              minutes: $minutes[difficulty.difficulty == "Easy" ? 0 : 1],
                                              seconds: $seconds,
@@ -33,7 +30,7 @@ struct GameModeLink: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationTitle("")
                         .toolbar {
-            
+            // screen title
             ToolbarItem(placement: .principal) {
                 if (timed){
                     HStack {
@@ -49,14 +46,15 @@ struct GameModeLink: View {
                     }.fixedSize(horizontal: true, vertical: true)
                 }
             }
-            
+            // start new game
             ToolbarItem(placement: .automatic) {
-                Button (action: { shouldPopToRootView = false
-                            SoundManager.instance.playSound(soundEffect: .tap4)
-                        
-                } ){
-                    Image(systemName: "plus.square")
-                }
+                Button (action: {
+                    // navigate to main screen
+                    shouldPopToRootView = false
+                    
+                    // play tap sound
+                    SoundManager.instance.playSound(soundEffect: .tap5)
+                }){ Image(systemName: "plus.square") }
             }
         }, isActive: self.$gameModeActive){
             ModeButton(difficulty: $difficulty.difficulty,

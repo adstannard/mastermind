@@ -14,6 +14,7 @@ class SoundManager {
         case tap2
         case tap3
         case tap4
+        case tap5
         case win
         case lose
         case reveal
@@ -27,6 +28,8 @@ class SoundManager {
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
+            
+            // play only if sound is enabled
             if (sound) {
                 player?.play()
             }

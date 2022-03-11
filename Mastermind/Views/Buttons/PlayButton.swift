@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PlayButton: View {
     
-    @State private var wave = true
     @Binding var isActive: Bool
     
     var body: some View {
@@ -13,21 +12,13 @@ struct PlayButton: View {
                             .stroke(Color.accentColor, lineWidth: 2)
                             .frame(width: 100, height: 100))
             .padding()
-            .opacity(wave ? 1 : 0.3)
-            .onAppear() {
-                wave.toggle()
-                withAnimation(
-                    .easeInOut(duration: 1)
-                        .repeatForever(autoreverses: true)
-                        .speed(1.5)) {
-                            wave.toggle()
-                        }
-            }
             .onTapGesture(perform: {
+                // navigate to corresponding screen
                 isActive = true
-                SoundManager.instance.playSound(soundEffect: .tap4)
-            }
-            )
+                
+                // play tap sound
+                SoundManager.instance.playSound(soundEffect: .tap5)
+            })
     }
 }
 

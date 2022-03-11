@@ -1,9 +1,6 @@
 import SwiftUI
 
 struct GameView: View {
-    private let colors: [Color] = [Color.red, Color.orange, Color.blue, Color.green, Color.yellow, Color.purple, Color.mint, Color.white]
-    private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
-    
     @State private var isReadyToSubmit = false
     @State private var attemptColors: [[Color]] = Array(repeating: Array(repeating: Color.clear, count: 6), count: 12)
     @State private var attemptNumbers: [[String]] = Array(repeating: Array(repeating: "", count: 6), count: 12)
@@ -29,48 +26,21 @@ struct GameView: View {
     
     var body: some View {
         // initialize code with colors based on random color indexes
-        let code = ran.map {(index) -> Color in colors[index]}
+        let code = ran.map {(index) -> Color in Constants.colors[index]}
         
         ZStack {
-            Rectangle().foregroundColor(background).ignoresSafeArea()
+            // background
+            Color.theme.background.edgesIgnoringSafeArea(.all)
             
-                VStack {
-                    Spacer(minLength: 30)
-                    Group {
-                        HStack(alignment: .center){
-                            // secret code
-                            ForEach(0..<difficulty.codeSize)  {
-                                // hide code
-                                if (hidden && !lost && !won){
-                                    ColorButton(fill: Binding.constant(Color.clear),
-                                                stroke: Binding.constant(Color.gray),
-                                                content: Binding.constant("?"),
-                                                selected: Binding.constant(false))
-                                }
-                                // reveal code
-                                else {
-                                    ColorButton(fill: Binding.constant(code[$0]),
-                                                stroke: Binding.constant(code[$0]),
-                                                content: Binding.constant(showNumbers ? String(ran[$0]+1) : ""),
-                                                selected: Binding.constant(false))
-                                }
-                            }
-                            
-                            // temporary button to reveal secret code
-                            Button(action: {
-                                
-                                // tap sound effect
-                                SoundManager.instance.playSound(soundEffect: hidden ? .reveal : .hide )
-                                
-                                // reveal/hide code
-                                hidden.toggle()
-                            }){
-                                Image(systemName: hidden ? "eye" : "eye.slash")
-                            }
-                        }
-                    }
-                    Spacer(minLength: 60)
-                    ScrollView{
+            VStack {
+                Spacer(minLength: 30)
+                // secret color code
+                SecretCodeView(difficulty: $difficulty,
+                               hidden: $hidden,
+                               code: Binding.constant(code),
+                               ran: $ran)
+                Spacer(minLength: 60)
+                ScrollView{
                     HStack{
                         if (selectedRight){
                             // place list of attempts to the left of color selector
@@ -83,9 +53,8 @@ struct GameView: View {
                                                 feedback: $feedback,
                                                 codeSize: $difficulty.codeSize,
                                                 attemptColors: $attemptColors,
-                                                attemptNumbers: $attemptNumbers,
-                                                isReadyToSubmit: $isReadyToSubmit
-                                    )
+                                                attemptNumbers: $attemptNumbers
+                                    ).padding(.top, 3) // avoid being cropped in scrollview
                                 }
                             }
                         }
@@ -126,16 +95,15 @@ struct GameView: View {
                                                 feedback: $feedback,
                                                 codeSize: $difficulty.codeSize,
                                                 attemptColors: $attemptColors,
-                                                attemptNumbers: $attemptNumbers,
-                                                isReadyToSubmit: $isReadyToSubmit
-                                    )
+                                                attemptNumbers: $attemptNumbers
+                                    ).padding(.top, 3) // avoid being cropped in scrollview
                                 }
                             }
                             Spacer()
                         }
                     }
                     Spacer()
-                    }
+                }
             }
             
             // end game popup
@@ -238,7 +206,11 @@ struct GameView_Previews: PreviewProvider {
                  showPopUp: Binding.constant(false),
                  won: Binding.constant(false),
                  lost: Binding.constant(false),
-                 difficulty: Binding.constant(Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Easy", color: .blue)),
-                 ran: Binding.constant([1,0,2,2,3,6]))
+                 difficulty: Binding.constant(Difficulty(maxAttempts: 12,
+                                                         codeSize: 6,
+                                                         numColors: 8,
+                                                         difficulty: "Easy",
+                                                         color: .blue)),
+                 ran: Binding.constant([1, 0, 2, 2, 3, 6]))
     }
 }

@@ -12,13 +12,10 @@ struct DifficultiesView: View {
     
     // difficulties array
     private let difficulties = [
-        Difficulty(maxAttempts: 8, codeSize: 4, numColors: 6, difficulty: "Easy", color: .green),
-        Difficulty(maxAttempts: 10, codeSize: 5, numColors: 7, difficulty: "Medium", color: .orange),
-        Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Hard", color: .red)
+        Difficulty(maxAttempts: 8, codeSize: 4, numColors: 6, difficulty: "Easy", color: Color.theme.green),
+        Difficulty(maxAttempts: 10, codeSize: 5, numColors: 7, difficulty: "Medium", color: Color.theme.orange),
+        Difficulty(maxAttempts: 12, codeSize: 6, numColors: 8, difficulty: "Hard", color: Color.theme.red)
     ]
-    
-    // screen background
-    private let background = Color(red: 0.0, green: 0.2, blue: 0.2)
     
     // generate random code (repetition allowed)
     func generateRandom(size: Int, max: Int) -> [Int] {
@@ -43,7 +40,10 @@ struct DifficultiesView: View {
     
     var body: some View {
         ZStack {
-            Rectangle().foregroundColor(background).ignoresSafeArea()
+            // background
+            Color.theme.background.edgesIgnoringSafeArea(.all)
+            
+            // game modes
             VStack{
                 Spacer()
                 ForEach(difficulties, id: \.self) {
@@ -59,18 +59,24 @@ struct DifficultiesView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("")
             .toolbar {
+                // screen title
                 ToolbarItem(placement: .principal) {
                     VStack {
                         Text("Game Modes").font(.system(size: 30)).foregroundColor(.accentColor)
                     }
                 }
+                
+                // settings
                 ToolbarItem(placement: .automatic) {
                     VStack {
                         NavigationLink(destination: SettingsView(), isActive:self.$isSettingsActive) {
                             Image(systemName: "gearshape")
                                 .onTapGesture {
+                                    // navigate to settings
                                     isSettingsActive = true
-                                    SoundManager.instance.playSound(soundEffect: .tap4)
+                                    
+                                    // play tap sound
+                                    SoundManager.instance.playSound(soundEffect: .tap5)
                                 }
                         }
                     }
@@ -83,6 +89,6 @@ struct DifficultiesView: View {
 
 struct DifficultiesView_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultiesView(rootIsActive: Binding.constant(false)).environment(\.locale, Locale(identifier: "es"))
+        DifficultiesView(rootIsActive: Binding.constant(false)).environment(\.locale, Locale(identifier: "en"))
     }
 }
