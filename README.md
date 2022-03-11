@@ -1,6 +1,9 @@
 
-<div style="text-align:center">
+<p align = "center">
 <img alt="icon" src="icon.png" width="150" height="auto"/>
+</p>
+
+<div align = "center">
 
 # Mastermind
 
@@ -8,9 +11,9 @@
 
 Mastermind app built in SwiftUI. Mastermind is code-breaking game whose objective is to guess the secret code in the fewest tries possible.
 
-<div style="text-align:center">
+<p align = "center">
 <img alt="demo" src="demo.gif" width="250" height="auto"/>
-</div>
+</p>
 
 ## Running Locally
 
