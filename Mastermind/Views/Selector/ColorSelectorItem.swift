@@ -3,7 +3,6 @@ import SwiftUI
 struct ColorSelectorItem: View {
     
     @State var color:Color
-    @State var canSubmit:Bool = false
     @Binding var content: String
     @Binding var attempt: Int
     @Binding var attemptColors: [[Color]]
@@ -14,29 +13,29 @@ struct ColorSelectorItem: View {
     @Binding var showNumbers: Bool
     
     
-    
     var body: some View {
         Button(action: assignColor){
             ColorButton(fill: $color,
-                            stroke: Binding.constant(.clear),
-                            content: showNumbers ? $content : Binding.constant(""),
-                            selected: Binding.constant(false))
+                        stroke: Binding.constant(.clear),
+                        content: showNumbers ? $content : Binding.constant(""),
+                        selected: Binding.constant(false))
         }
     }
     
-    
+    // Check if ready to submit (all empty slots are filled)
     func setIsReadyToSubmit() {
         
         for i in 0..<codeSize {
             if (attemptColors[attempt][i] == Color.clear){
-                canSubmit = false
+                isReadyToSubmit = false
                 return
             }
         }
-        canSubmit = true
+        isReadyToSubmit = true
     }
     
     
+    // Assign color selector item to selected slot
     func assignColor() {
         
         // button tap sound effect
@@ -52,31 +51,28 @@ struct ColorSelectorItem: View {
         if (selected == (codeSize - 1)){
             selected=0
         }
+        
         // select next position
-        else{
+        else {
             selected+=1
         }
         
+        // check if ready to submit
         setIsReadyToSubmit()
-        
-        isReadyToSubmit = canSubmit
-        
     }
-    
-    
 }
 
 
 struct ColorSelectorItem_Previews: PreviewProvider {
     static var previews: some View {
         ColorSelectorItem(color: Color.green,
-                              content: Binding.constant("A"),
-                              attempt: Binding.constant(0),
-                              attemptColors: Binding.constant([[Color.green, Color.blue, Color.blue, Color.blue, Color.blue, Color.blue]]),
-                              attemptNumbers: Binding.constant([["2", "1", "0", "3", "2", "2"]]),
-                              selected: Binding.constant(2),
-                              codeSize:Binding.constant(6),
-                              isReadyToSubmit:Binding.constant(false),
-                              showNumbers: Binding.constant(true)).background(Color.black)
+                          content: Binding.constant("A"),
+                          attempt: Binding.constant(0),
+                          attemptColors: Binding.constant([[Color.green, Color.blue, Color.blue, Color.blue, Color.blue, Color.blue]]),
+                          attemptNumbers: Binding.constant([["2", "1", "0", "3", "2", "2"]]),
+                          selected: Binding.constant(2),
+                          codeSize:Binding.constant(6),
+                          isReadyToSubmit:Binding.constant(false),
+                          showNumbers: Binding.constant(true)).background(Color.black)
     }
 }

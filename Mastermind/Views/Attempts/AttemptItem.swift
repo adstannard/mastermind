@@ -11,9 +11,11 @@ struct AttemptItem: View {
     
     
     var body: some View {
-        
         Button(action: {
+            // select this button
             selected = position
+            
+            // play tap sound
             SoundManager.instance.playSound(soundEffect: .tap2)
         }){
             ColorButton(fill: $color,
@@ -22,7 +24,7 @@ struct AttemptItem: View {
                         Binding.constant(Color.gray): Binding.constant(Color.clear),
                         content: $content,
                         selected: Binding.constant(currentAttempt == attempt  && selected == position))
-        }.padding(.top, 3)
+        }
         .disabled(currentAttempt != attempt)
     }
 }

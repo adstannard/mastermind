@@ -4,7 +4,7 @@ struct PopUpWindow: View {
     @Binding var show: Bool
     @Binding var shouldPopToRootView: Bool
     
-    @State private var wave = true
+    @State private var fadeInOut = true
     
     var title: String
     var subTitle: String
@@ -14,11 +14,11 @@ struct PopUpWindow: View {
     var body: some View {
         ZStack {
             if show {
-                
+                // darken background
                 Color.black.opacity(show ? 0.4 : 0).edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .center, spacing: 0) {
-                    
+                    // popup title
                     Text(LocalizedStringKey(title))
                         .frame(maxWidth: .infinity)
                         .frame(height: 45, alignment: .center)
@@ -26,24 +26,27 @@ struct PopUpWindow: View {
                         .padding(EdgeInsets(top: 0, leading: 25, bottom: 10, trailing: 25))
                         .foregroundColor(.accentColor)
                     
+                    // popup subtitle (with fade in/fade out animation)
                     Text(LocalizedStringKey(subTitle))
                         .multilineTextAlignment(.center)
                         .font(Font.system(size: 25, weight: .semibold))
                         .padding(EdgeInsets(top: 0, leading: 25, bottom: 20, trailing: 25))
                         .foregroundColor(.accentColor)
-                        .opacity(wave ? 1 : 0.3)
+                        .opacity(fadeInOut ? 1 : 0.3)
                         .onAppear() {
-                            self.wave.toggle()
+                            self.fadeInOut.toggle()
                             withAnimation(
                                 .easeInOut(duration: 1)
                                     .repeatForever(autoreverses: true)
                                     .speed(2))
                             {
-                                self.wave.toggle()
+                                self.fadeInOut.toggle()
                             }
                         }
                     
+                    // game info
                     HStack {
+                        // time left
                         if (time != "") {
                             VStack{
                                 Text("time left")
@@ -58,6 +61,7 @@ struct PopUpWindow: View {
                                     .foregroundColor(.accentColor)
                             }
                         }
+                        // attempts used
                         VStack{
                             Text("attempt\(attempt <= 1 ? "" : "s")")
                                 .multilineTextAlignment(.center)
@@ -72,32 +76,40 @@ struct PopUpWindow: View {
                         }
                     }
                     
+                    // OK button
                     Button(action: {
+                        // play tap sound
+                        SoundManager.instance.playSound(soundEffect: .tap5)
+                        
+                        // dismiss popup
                         withAnimation(.linear(duration: 0.3)) {
                             show = false
                         }
+                        // go back to root (home screen)
                         shouldPopToRootView = false
                         
                     }, label: {
                         Text("OK")
                             .frame(maxWidth: 60)
                             .frame(height: 40, alignment: .center)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(
+                                Color.accentColor
+                            )
                             .font(Font.system(size: 23, weight: .semibold))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.accentColor, lineWidth: 2)
                             ).background(RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color(red: 0.0, green: 0.15, blue: 0.15)))
+                                            .fill(Color.theme.secondaryBackground))
                             .padding(EdgeInsets(top: 10, leading: 25, bottom: 20, trailing: 25))
                         
                     }).buttonStyle(PlainButtonStyle())
                 }
                 .frame(maxWidth: 281)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.accentColor, lineWidth: 2)
-                ).background(RoundedRectangle(cornerRadius: 10).fill(Color(red: 0.0, green: 0.2, blue: 0.2)))
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.accentColor, lineWidth: 2))
+                .background(RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.theme.background))
             }
         }
     }
@@ -108,9 +120,10 @@ struct PopUpWindow_Previews: PreviewProvider {
     static var previews: some View {
         PopUpWindow(show: Binding.constant(true),
                     shouldPopToRootView: Binding.constant(true),
-                    title:"TitleWon",
+                    title: "TitleWon",
                     subTitle: "SubTitleWon",
                     time:  String(format: "%d:%02d", 3, 2),
-                    attempt:3).environment(\.locale, Locale(identifier: "es"))
+                    attempt: 3)
+            .environment(\.locale, Locale(identifier: "en"))
     }
 }
