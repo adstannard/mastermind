@@ -74,7 +74,7 @@ struct SettingsView: View {
                                 .resizable()
                                 .frame(width: 25, height: 15)
                                 .padding(.trailing, 10)
-                            Text("Peek at Secret Code:")
+                            Text("Show Secret Code:")
                         }).tint(.accentColor)
                         Divider().background(Color.accentColor).padding(.vertical, 10)
                         

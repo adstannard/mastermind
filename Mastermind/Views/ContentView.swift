@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var isActive : Bool = false
+    @State var isActiveDifficulties : Bool = false
+    @State var isActiveSettings : Bool = false
     @State private var action: Int? = 0
     
     var body: some View {
@@ -15,24 +16,17 @@ struct ContentView: View {
                     Spacer()
                     
                     // Play Game
-                    NavigationLink(destination: DifficultiesView(rootIsActive: self.$isActive),
-                                   isActive: self.$isActive) {
-                        PlayButton(isActive: self.$isActive)
+                    NavigationLink(destination: DifficultiesView(rootIsActive: self.$isActiveDifficulties),
+                                   isActive: self.$isActiveDifficulties) {
+                        PlayButton(isActive: self.$isActiveDifficulties)
                     }
                     Spacer()
                     
                     // Game Settings
-                    NavigationLink(destination: SettingsView(), tag: 1, selection: $action) {
-                        EmptyView()
+                    NavigationLink(destination: SettingsView(),
+                                   isActive: self.$isActiveSettings) {
+                        SettingsButton(isActive: self.$isActiveSettings)
                     }
-                    SettingsButton()
-                        .onTapGesture {
-                            // navigate to settings
-                            self.action = 1
-                            
-                            // play tap sound
-                            SoundManager.instance.playSound(soundEffect: .tap5)
-                        }
                 }
                 .zIndex(2)
                 .foregroundColor(.accentColor)
