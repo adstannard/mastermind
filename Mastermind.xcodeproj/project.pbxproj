@@ -66,7 +66,7 @@
 		D32B34DB27D7EED8006B7B3C /* tap1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap1.mp3; sourceTree = "<group>"; };
 		D32B34DC27D7EED8006B7B3C /* tap2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap2.mp3; sourceTree = "<group>"; };
 		D32B34DF27D801C5006B7B3C /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
-		D32B34E527D80474006B7B3C /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = lose.mp3; path = ../../../../Downloads/lose.mp3; sourceTree = "<group>"; };
+		D32B34E527D80474006B7B3C /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = lose.mp3; path = Mastermind/Sounds/lose.mp3; sourceTree = SOURCE_ROOT; };
 		D32B34E727D80537006B7B3C /* tap3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap3.mp3; sourceTree = "<group>"; };
 		D32B34E927D806DA006B7B3C /* reveal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reveal.mp3; sourceTree = "<group>"; };
 		D32B34EB27D80B04006B7B3C /* hide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hide.mp3; sourceTree = "<group>"; };
@@ -540,7 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Mastermind/Preview Content\"";
-				DEVELOPMENT_TEAM = WTDD29TZ7Y;
+				DEVELOPMENT_TEAM = V7G849S9UN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -571,7 +571,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Mastermind/Preview Content\"";
-				DEVELOPMENT_TEAM = WTDD29TZ7Y;
+				DEVELOPMENT_TEAM = V7G849S9UN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
